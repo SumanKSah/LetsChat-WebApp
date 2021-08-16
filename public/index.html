@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="topHeader">
+        <nav class="navBar">
+
+            <div class="profile">
+                <img src="./Images/profile.png" width="40" style="margin: 12px 20px;">
+                <p>Hi There!!</p>
+            </div>
+
+            <div class="signInUp">
+                <button type="button" id="signIn">Log in</button>
+                <button type="button" id="signUp">Sign up</button>
+            </div>
+        </nav>
+    </header>
+    <div class="sidenav">
+        <div id="logo">
+            <img src="./Images/logo.png" alt="Logo Image" width="70" style="background-color: #318CE7;">
+            <h3>Let's Chat ...</h3>
+        </div>
+        <div class="connectedTo">
+            <img src="./Images/person.png" alt="Person image" width="150">
+            <h3 id="userName">User Name</h3>
+        </div>
+        <button type="button" id="nextUser">NEXT</button>
+
+        <div class="people">
+            <span>Available: </span>
+            <p id="availableUser">5</p>
+            <br>
+            <br>
+            <span>Online: &nbsp; </span>
+            <p id="totalOnline">50</p>
+        </div>
+
+    </div>
+    <div class="chats" >
+        <div class="top">Chats</div>
+        <div class="chatList" id="scrl">
+
+            <div class="send">hello india</div>
+            <div class="received msg">hello</div>
+            <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+                consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
+                obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
+            <div class="send">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam consequuntur,
+                dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
+                Aut ducimus aliquam inventore assumenda modi!</div>
+
+            <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+                consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
+                obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
+            <div class="send">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam consequuntur,
+                dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
+                Aut ducimus aliquam inventore assumenda modi!</div>
+
+            <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+                consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
+                obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
+            <div class="send msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam consequuntur,
+                dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
+                Aut ducimus aliquam inventore assumenda modi!</div>
+
+        </div>
+        <div class="messageDiv">
+            <input type="text" id="messageBox" spellcheck="false">
+            <button type="button" id="sendMessage">Send</button>
+        </div>
+    </div>
+    <footer class="bottomFooter">
+        <h3>© Suman Kr. Sah</h3>
+    </footer>
+
+    <script>
+        var objDiv = document.getElementById("scrl");
+        objDiv.scrollTop = objDiv.scrollHeight;
+    </script>
+</body>
+
+</html>
