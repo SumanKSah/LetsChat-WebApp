@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Chat</title>
     <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="./index.js"></script>
 </head>
 
 <body>
@@ -15,10 +17,12 @@
 
             <div class="profile">
                 <img src="./Images/profile.png" width="40" style="margin: 12px 20px;">
-                <p>Hi There!!</p>
+                <p id="mainUser">Hi There!!</p>
             </div>
 
             <div class="signInUp">
+                <input type="text" id="loginUser" placeholder="User Name">
+                <input type="text" id="loginPassword" placeholder="Password">
                 <button type="button" id="signIn">Log in</button>
                 <button type="button" id="signUp">Sign up</button>
             </div>
@@ -37,23 +41,25 @@
 
         <div class="people">
             <span>Available: </span>
-            <p id="availableUser">5</p>
+            <p id="availableUser">-</p>
             <br>
             <br>
-            <span>Online: &nbsp; </span>
-            <p id="totalOnline">50</p>
+            <span>Online: &nbsp; &nbsp; </span>
+            <p id="totalOnline">-</p>
         </div>
 
     </div>
-    <div class="chats" >
+    <div class="chats">
         <div class="top">Chats</div>
         <div class="chatList" id="scrl">
 
             <div class="send">hello india</div>
             <div class="received msg">hello</div>
+
             <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
                 obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
+
             <div class="send">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam consequuntur,
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
@@ -61,6 +67,7 @@
             <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
                 obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
+
             <div class="send">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam consequuntur,
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
@@ -68,7 +75,9 @@
             <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
                 obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
-            <div class="send msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam consequuntur,
+
+            <div class="send msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+                consequuntur,
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
 
@@ -82,10 +91,7 @@
         <h3>© Suman Kr. Sah</h3>
     </footer>
 
-    <script>
-        var objDiv = document.getElementById("scrl");
-        objDiv.scrollTop = objDiv.scrollHeight;
-    </script>
+
 </body>
 
 </html>
