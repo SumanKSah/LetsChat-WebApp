@@ -17,9 +17,36 @@ const btnNext = document.getElementById("nextUser");
 const availableUser = document.getElementById("availableUser");
 const onlineUser = document.getElementById("totalOnline");
 
+// signup Menu
+const heading = document.getElementById("heading");
+const signuppage = document.getElementById("signuppage");
+const btnCheckAvail = document.getElementById('checkAvail');
+const btnSignupSubmit = document.getElementById('signupSubmit');
+const btnSignupCancel = document.getElementById('signupCancel');
 
 
 btnsendMsg.disabled = true;
 inpMsg.disabled = true;
+btnNext.disabled = true;
 
-chatList.style.backgroundImage = "none"
+// chatList.style.backgroundImage = "inline-block";
+chatList.style.backgroundImage = "none";
+
+btnSignup.addEventListener("click", () => {
+    btnSignup.disabled = true;
+    heading.innerText = "Sign up";
+    btnLogin.disabled = true;
+    loginPassword.disabled = true;
+    loginUser.disabled = true;
+    signuppage.style.display = "inline-block";
+});
+
+btnSignupCancel.addEventListener('click',()=>{
+    signuppage.style.display = 'none';
+    btnSignup.disabled = false;
+    heading.innerText = "Chats";
+    btnLogin.disabled = false;
+    loginPassword.disabled = false;
+    loginUser.disabled = false;
+})
+
