@@ -12,6 +12,9 @@
 </head>
 
 <body>
+
+    <!-- Header  -->
+
     <header class="topHeader">
         <nav class="navBar">
 
@@ -22,12 +25,17 @@
 
             <div class="signInUp">
                 <input type="text" id="loginUser" placeholder="User Name">
-                <input type="text" id="loginPassword" placeholder="Password">
+                <input type="password" id="loginPassword" placeholder="Password">
                 <button type="button" id="signIn">Log in</button>
                 <button type="button" id="signUp">Sign up</button>
             </div>
         </nav>
     </header>
+
+   
+
+    <!-- Sidenav bar -->
+
     <div class="sidenav">
         <div id="logo">
             <img src="./Images/logo.png" alt="Logo Image" width="70" style="background-color: #318CE7;">
@@ -49,14 +57,18 @@
         </div>
 
     </div>
+
+
+    <!-- chats part -->
+
     <div class="chats">
         <div class="top">Chats</div>
         <div class="chatList" id="scrl">
 
-            <div class="send">hello india</div>
-            <div class="received msg">hello</div>
+           <!--  <div class="send">Hey!!</div>
+            <div class="received ">Hello</div>
 
-            <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+            <div class="received">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
                 obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
 
@@ -64,7 +76,7 @@
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
 
-            <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+            <div class="received">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
                 obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
 
@@ -72,14 +84,17 @@
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
 
-            <div class="received msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+            <div class="received">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur, dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum
                 obcaecati. Aut ducimus aliquam inventore assumenda modi!</div>
 
-            <div class="send msg">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
+            <div class="send">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
                 consequuntur,
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
+
+            <div class="left">User left the chat</div> -->
+
 
         </div>
         <div class="messageDiv">
@@ -87,9 +102,38 @@
             <button type="button" id="sendMessage">Send</button>
         </div>
     </div>
+
+
+    <!-- Footer  -->
+
     <footer class="bottomFooter">
         <h3>© Suman Kr. Sah</h3>
     </footer>
+
+     <!-- Signup page -->
+     <div id="signuppage">
+        <form id="userSignup">
+            <label for="signupUsername">Username</label>
+            <input type="text" name="signupUsername" spellcheck="false">
+            <button type="button" id="checkAvail">Check Available</button>
+
+            <br>
+
+            <label for="signupPassword">Password</label>
+            <input type="password" name="signupPassword">
+
+            <br>
+
+            <label for="signupBio">Bio
+           <textarea name="signupBio" rows="3" style="vertical-align: middle;" spellcheck="false"></textarea></label>
+
+            <br>
+
+            <button type="button" id="signupSubmit">Submit</button>
+            <Button type="reset" id="signupReset">Reset</Button>
+        </form>
+    </div>
+
 
 
 </body>

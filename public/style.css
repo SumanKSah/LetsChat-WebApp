@@ -64,7 +64,8 @@ button:disabled {
     right: 10px;
 }
 
-#loginUser, #loginPassword {
+#loginUser,
+#loginPassword {
     width: 160px;
     padding: 5px;
     margin-right: 10px;
@@ -74,6 +75,9 @@ button:disabled {
 
 #sendMessage,
 #nextUser,
+#signupSubmit,
+#signupReset,
+#checkAvail,
 .signInUp > #signIn,
 #signUp {
     background-color: #318ce7;
@@ -167,7 +171,7 @@ span {
     border-radius: 10px;
 }
 
-#messageBox:disabled{
+#messageBox:disabled {
     background-color: #f5f5f5;
 }
 
@@ -184,10 +188,18 @@ span {
 }
 
 .chats > .top {
-    padding-left:20px ;
+    padding-left: 20px;
 }
 
 .chatList {
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.2),
+            rgba(255, 255, 255, 0.2)
+        ),
+        url("./Images/chatListBackground.png") center;
+    background-repeat: no-repeat;
+    background-size: auto 400px;
+
     background-color: transparent;
     height: 510px;
     border-left: #b2ffff 5px solid;
@@ -219,6 +231,23 @@ span {
     margin-bottom: 5px;
 }
 
+.left {
+    float: none;
+    clear: both;
+    color: #f5f5f5;
+    width: fit-content;
+    background-color: #318ce7;
+    right: 15px;
+    padding: 3px 12px;
+    border-radius: 5px;
+    font-size: 10pt;
+    font-weight: normal;
+    font-style: italic;
+    margin-bottom: 5px;
+    position: relative;
+    left: 400px;
+}
+
 .received {
     float: left;
     clear: both;
@@ -238,4 +267,56 @@ span {
     position: absolute;
     left: 35%;
     padding-top: 9px;
+}
+
+#signuppage {
+    width: 910px;
+    position: absolute;
+    top: 130px;
+    left: 475px;
+    height: 500px;
+    background-color: #e5e4e2;
+    display: inline-block;
+    border-radius: 10px;
+    animation-name: signupanim;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+}
+
+@keyframes signupanim {
+    0% {
+        transform: translateY(-800px) scale(0.1, 0.1);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+#userSignup {
+    width: fit-content;
+    height: fit-content;
+    display: inline-block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#userSignup input,
+textarea {
+    clear: right;
+    left: 100px;
+    width: 300px;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 10px;
+    border: 2px solid #318ce7;
+}
+
+#userSignup label {
+    font-size: 15pt;
+    font-weight: bold;
 }

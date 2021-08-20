@@ -21,3 +21,5 @@ const onlineUser = document.getElementById("totalOnline");
 
 btnsendMsg.disabled = true;
 inpMsg.disabled = true;
+
+chatList.style.backgroundImage = "none"
