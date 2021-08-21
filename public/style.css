@@ -41,21 +41,19 @@ button:disabled {
 }
 
 #logo {
+    width: fit-content;
     background-color: #b2ffff;
     border-bottom-right-radius: 20px;
     border-top-right-radius: 20px;
     display: flex;
-    margin-left: 20px;
-    width: fit-content;
-    height: fit-content;
+    margin: 0 auto;
+   
 }
 
 #logo h3 {
     font-size: 20pt;
     padding: 12px 30px;
     display: inline-block;
-    /*     position: absolute;
- */
 }
 
 .navBar .signInUp {
@@ -100,14 +98,15 @@ button {
 }
 
 .sidenav #nextUser {
-    width: 245px;
-    margin: 5px 40px;
+    width: 230px;
+    margin: 5px 47px;
 }
 
 .connectedTo,
 .people {
+    width: fit-content;
     background-color: #b2ffff;
-    margin: 20px 40px;
+    margin: 20px auto;
     margin-top: 40px;
     border-radius: 15px;
     align-items: center;
@@ -115,14 +114,17 @@ button {
 }
 
 .connectedTo #userName {
-    font-size: 20pt;
-    padding-left: 18px;
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 17pt;
+    margin-top: 5px;
 }
 
 .people {
     position: fixed;
+    left: 55px;
     bottom: 20px;
-    width: 245px;
+    width: 230px;
 }
 
 .people > p,

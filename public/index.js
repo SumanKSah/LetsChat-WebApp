@@ -20,10 +20,9 @@ const onlineUser = document.getElementById("totalOnline");
 // signup Menu
 const heading = document.getElementById("heading");
 const signuppage = document.getElementById("signuppage");
-const btnCheckAvail = document.getElementById('checkAvail');
-const btnSignupSubmit = document.getElementById('signupSubmit');
-const btnSignupCancel = document.getElementById('signupCancel');
-
+const btnCheckAvail = document.getElementById("checkAvail");
+const formSignup = document.getElementById("userSignup");
+const btnSignupCancel = document.getElementById("signupCancel");
 
 btnsendMsg.disabled = true;
 inpMsg.disabled = true;
@@ -41,12 +40,35 @@ btnSignup.addEventListener("click", () => {
     signuppage.style.display = "inline-block";
 });
 
-btnSignupCancel.addEventListener('click',()=>{
-    signuppage.style.display = 'none';
+btnSignupCancel.addEventListener("click", () => {
+    signuppage.style.display = "none";
     btnSignup.disabled = false;
     heading.innerText = "Chats";
     btnLogin.disabled = false;
     loginPassword.disabled = false;
     loginUser.disabled = false;
-})
+});
 
+formSignup.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const formdata = new FormData(formSignup);
+    const params = new URLSearchParams();
+
+    for (const pair of formdata) {
+        params.append(pair[0], pair[1]);
+    }
+
+    fetch("/signup", {
+        method: "POST",
+        body: params,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+    })
+    .then((res)=>res.text())
+        .then((data) => alert(data))
+        .catch((err) => alert('Some Error Occurred :('));
+
+    btnSignupCancel.click();
+});
