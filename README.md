@@ -1,0 +1,3 @@
+### Let's Chat ...
+
+It's a Real time chat web application made using HTML, CSS and JavaScript for Frontend and Express.js for Backend.
