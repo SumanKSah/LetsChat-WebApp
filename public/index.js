@@ -2,8 +2,8 @@
 const user = document.getElementById("mainUser");
 const btnLogin = document.getElementById("signIn");
 const btnSignup = document.getElementById("signUp");
-const loginUser = document.getElementById("loginUser");
-const loginPassword = document.getElementById("loginPassword");
+const btnLogout = document.getElementById("btnLogout");
+const formLogin = document.getElementById("formLogin");
 
 //chatBox
 const inpMsg = document.getElementById("messageBox");
@@ -49,8 +49,16 @@ btnSignupCancel.addEventListener("click", () => {
     loginUser.disabled = false;
 });
 
+const signupPassword = document.getElementById("signupPassword");
+const signupUsername = document.getElementById("signupUsername");
+
 formSignup.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (!signupPassword.value || !signupUsername.value) {
+        alert("Either Username or Password left BLANK");
+        return;
+    }
 
     const formdata = new FormData(formSignup);
     const params = new URLSearchParams();
@@ -66,9 +74,35 @@ formSignup.addEventListener("submit", (e) => {
             "Content-Type": "application/x-www-form-urlencoded",
         },
     })
-    .then((res)=>res.text())
+        .then((res) => res.text())
         .then((data) => alert(data))
-        .catch((err) => alert('Some Error Occurred :('));
+        .catch((err) => alert("Some Error Occurred :("));
 
     btnSignupCancel.click();
+});
+
+btnCheckAvail.addEventListener("click", () => {
+    if (!signupUsername.value) {
+        alert("Username can't be null");
+    } else {
+        fetch(`/check?signupUsername=${signupUsername.value}`)
+        .then()
+
+
+
+
+        //TODO: do this
+    }
+});
+
+btnLogin.addEventListener("click", () => {
+    formLogin.style.display = "none";
+    btnSignup.style.display = "none";
+    btnLogout.style.display = "inline-block";
+});
+
+btnLogout.addEventListener("click", () => {
+    formLogin.style.display = "inline-block";
+    btnSignup.style.display = "inline-block";
+    btnLogout.style.display = "none";
 });

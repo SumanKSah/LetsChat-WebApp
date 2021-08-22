@@ -24,15 +24,19 @@
             </div>
 
             <div class="signInUp">
-                <input type="text" id="loginUser" placeholder="User Name">
-                <input type="password" id="loginPassword" placeholder="Password">
-                <button type="button" id="signIn">Log in</button>
+                <button id="btnLogout" type="button" style="display: none;">Log out</button>
+
+                <form id="formLogin" style="display: inline-block;">
+                    <input type="text" name="loginUser" class="loginParam" placeholder="User Name">
+                    <input type="password" name="loginPassword" class="loginParam" placeholder="Password">
+                    <button type="button" id="signIn">Log in</button>
+                </form>
+
                 <button type="button" id="signUp">Sign up</button>
             </div>
         </nav>
     </header>
 
-   
 
     <!-- Sidenav bar -->
 
@@ -65,7 +69,7 @@
         <div class="top" id="heading">Chats</div>
         <div class="chatList" id="scrl">
 
-             <div class="send">Hey!!</div>
+            <div class="send">Hey!!</div>
             <div class="received ">Hello</div>
 
             <div class="received">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus ullam
@@ -85,7 +89,7 @@
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
 
-            <div class="left">User left the chat</div> 
+            <div class="left">User left the chat</div>
 
 
         </div>
@@ -102,22 +106,23 @@
         <h3>© Suman Kr. Sah</h3>
     </footer>
 
-     <!-- Signup page -->
-     <div id="signuppage">
+    <!-- Signup page -->
+    <div id="signuppage">
         <form id="userSignup">
             <label for="signupUsername">Username</label>
-            <input type="text" name="signupUsername" spellcheck="false">
+            <input type="text" name="signupUsername" id="signupUsername" spellcheck="false">
             <button type="button" id="checkAvail">Check Available</button>
 
             <br>
 
             <label for="signupPassword">Password</label>
-            <input type="password" name="signupPassword">
+            <input type="password" name="signupPassword" id="signupPassword">
 
             <br>
 
             <label for="signupBio">Bio
-           <textarea name="signupBio" rows="3" style="vertical-align: middle;" spellcheck="false" placeholder="Tell us Something about you..."></textarea></label>
+                <textarea name="signupBio" rows="3" style="vertical-align: middle;" spellcheck="false"
+                    placeholder="Tell us Something about you..."></textarea></label>
 
             <br>
 
@@ -126,7 +131,6 @@
             <button type="button" id="signupCancel">Cancel</button>
         </form>
     </div>
-
 
 
 </body>
