@@ -43,6 +43,24 @@ app.post("/signup", (req, res) => {
         .catch((err) => res.send("Some error Occured :( !!"));
 });
 
+async function find(name){
+    let data = await userCollection.findOne({username:name})
+
+    return data;
+}
+
+app.get('/check',(req,res)=>{
+
+    find(req.query.signupUsername).then((item)=>{
+        if(!item)
+        res.send({present:false})
+    else 
+        res.send({present:true})
+    }) 
+    .catch((err)=>console.error(err))
+
+})
+
 // Listening for the sockets
 io.on("connection", (socket) => {
     console.log("user connected with id: ", socket);

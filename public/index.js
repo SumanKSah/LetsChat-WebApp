@@ -23,7 +23,11 @@ const signuppage = document.getElementById("signuppage");
 const btnCheckAvail = document.getElementById("checkAvail");
 const formSignup = document.getElementById("userSignup");
 const btnSignupCancel = document.getElementById("signupCancel");
+const btnSignupSubmit = document.getElementById('signupSubmit')
+const checkMark = document.getElementById('checkMark');
 
+
+btnSignupSubmit.disabled = true
 btnsendMsg.disabled = true;
 inpMsg.disabled = true;
 btnNext.disabled = true;
@@ -31,12 +35,19 @@ btnNext.disabled = true;
 // chatList.style.backgroundImage = "inline-block";
 chatList.style.backgroundImage = "none";
 
+let childNodes = formLogin
+        .getElementsByTagName("*");
+
 btnSignup.addEventListener("click", () => {
     btnSignup.disabled = true;
     heading.innerText = "Sign up";
     btnLogin.disabled = true;
-    loginPassword.disabled = true;
-    loginUser.disabled = true;
+    // formLogin.disabled = true;
+
+    for (var node of childNodes) {
+        node.disabled = true;
+    }
+
     signuppage.style.display = "inline-block";
 });
 
@@ -45,8 +56,11 @@ btnSignupCancel.addEventListener("click", () => {
     btnSignup.disabled = false;
     heading.innerText = "Chats";
     btnLogin.disabled = false;
-    loginPassword.disabled = false;
-    loginUser.disabled = false;
+    checkMark.style.visibility = 'hidden';
+
+    for (var node of childNodes) {
+        node.disabled = false;
+    }
 });
 
 const signupPassword = document.getElementById("signupPassword");
@@ -81,17 +95,26 @@ formSignup.addEventListener("submit", (e) => {
     btnSignupCancel.click();
 });
 
+
 btnCheckAvail.addEventListener("click", () => {
     if (!signupUsername.value) {
         alert("Username can't be null");
     } else {
         fetch(`/check?signupUsername=${signupUsername.value}`)
-        .then()
-
-
-
-
-        //TODO: do this
+        .then((res)=>res.json())
+        .then((data)=>{
+            if(data.present == false) {
+                btnSignupSubmit.disabled = false;
+                checkMark.style.visibility = 'visible'
+                checkMark.innerHTML = '✔'
+            } else {
+                checkMark.style.visibility = 'visible'
+                checkMark.innerHTML = '✖'
+                
+            }
+        })
+        .catch((err)=>console.error(err))
+        
     }
 });
 

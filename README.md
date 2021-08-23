@@ -7,4 +7,5 @@ It's a Real-time chat web-application made using HTML, CSS and JavaScript for Fr
 &emsp; 2. socket.io - for handling different sockets (users).
 
 <br>
+
 ### More to come ........
