@@ -26,20 +26,27 @@ const btnSignupCancel = document.getElementById("signupCancel");
 const btnSignupSubmit = document.getElementById("signupSubmit");
 const checkMark = document.getElementById("checkMark");
 
+// Initializing socket Port
+const socket = io();
 
 // initially disabling the unwanted buttons.
-btnSignupSubmit.disabled = true;
-btnsendMsg.disabled = true;
-inpMsg.disabled = true;
-btnNext.disabled = true;
+function initialDisable() {
+    btnSignupSubmit.disabled = true;
+    btnsendMsg.disabled = true;
+    inpMsg.disabled = true;
+    btnNext.disabled = true;
+    btnNext.innerText = 'CONNECT'
+}
+
+initialDisable();
+let currentUser ='';
+
 
 // chatList.style.backgroundImage = "inline-block";
 chatList.style.backgroundImage = "none";
 
-
 // getting all the child node of formLogin for enabling and disabling it in future.
 let childNodes = formLogin.getElementsByTagName("*");
-
 
 // Event listeneer for signup button
 // It will open up signup page
@@ -55,7 +62,6 @@ btnSignup.addEventListener("click", () => {
 
     signuppage.style.display = "inline-block";
 });
-
 
 // Event Listener for signupCancel Button
 btnSignupCancel.addEventListener("click", () => {
@@ -84,7 +90,7 @@ formSignup.addEventListener("submit", (e) => {
     }
 
     //  since I am using x-www-form-urlencoded, so i have to send the params via URLSearchParams
-    // for that converting the formdata into URLSearchParams object. 
+    // for that converting the formdata into URLSearchParams object.
     const formdata = new FormData(formSignup);
     const params = new URLSearchParams();
 
@@ -107,7 +113,6 @@ formSignup.addEventListener("submit", (e) => {
     btnSignupCancel.click();
 });
 
-
 // Event Listener for check Available button of signup page.
 btnCheckAvail.addEventListener("click", () => {
     if (!signupUsername.value) {
@@ -129,50 +134,77 @@ btnCheckAvail.addEventListener("click", () => {
     }
 });
 
-
-// Event Listener for Login button.  
+// Event Listener for Login button.
 btnLogin.addEventListener("click", () => {
-
     const data = new FormData(formLogin);
     const params = new URLSearchParams();
 
-    for(let pair of data){
-        if(!pair[0] || !pair[1]) {
-            alert('Both Username and Password are required');
+    for (let pair of data) {
+        if (!pair[0] || !pair[1]) {
+            alert("Both Username and Password are required");
             return;
-        }
-        else {
-            param.append(pair[0],pair[1]);
+        } else {
+            params.append(pair[0], pair[1]);
         }
     }
 
-    fetch('/login',{
-        method:'post',
-        body:params,
-        headers:{
-            'Content-Type':'application/x-www-form-urlencoded',
+    fetch("/login", {
+        method: "post",
+        body: params,
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
         },
-    }).then((res)=>res.json())
-    .then((data)=>{
-
     })
-    .catch((err)=>console.error(err))
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.status == 3) {
+                currentUser = data.user
+                user.innerHTML = `Hey, ${data.user} !!`;
+                userLoggedIn();
 
+                socket.emit("login_success", {
+                    user: data.user,
+                });
+            } else if (data.status == 1) {
+                alert("Not a VALID user");
+            } else {
+                alert("Authentication Failed");
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+        });
+});
+
+function userLoggedIn() {
+    btnNext.disabled = false;
     formLogin.style.display = "none";
     btnSignup.style.display = "none";
     btnLogout.style.display = "inline-block";
 
-});
+    chatList.innerHTML = '';
 
+    socket.emit('logged_in',{
+        user:currentUser,
+    })
+}
 
 // all socket code Here
 
-const socket = io();
-
-
-// Event Listener for Log out button 
+// Event Listener for Log out button
 btnLogout.addEventListener("click", () => {
+    user.innerText = "Hi There!!";
+    initialDisable();
     formLogin.style.display = "inline-block";
     btnSignup.style.display = "inline-block";
     btnLogout.style.display = "none";
+
+    socket.emit('logged_out',{
+        user: currentUser,
+    })
 });
+
+
+btnNext.addEventListener('click',()=>{
+    btnNext.innerText = 'NEXT';
+})
