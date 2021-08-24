@@ -23,11 +23,12 @@ const signuppage = document.getElementById("signuppage");
 const btnCheckAvail = document.getElementById("checkAvail");
 const formSignup = document.getElementById("userSignup");
 const btnSignupCancel = document.getElementById("signupCancel");
-const btnSignupSubmit = document.getElementById('signupSubmit')
-const checkMark = document.getElementById('checkMark');
+const btnSignupSubmit = document.getElementById("signupSubmit");
+const checkMark = document.getElementById("checkMark");
 
 
-btnSignupSubmit.disabled = true
+// initially disabling the unwanted buttons.
+btnSignupSubmit.disabled = true;
 btnsendMsg.disabled = true;
 inpMsg.disabled = true;
 btnNext.disabled = true;
@@ -35,9 +36,13 @@ btnNext.disabled = true;
 // chatList.style.backgroundImage = "inline-block";
 chatList.style.backgroundImage = "none";
 
-let childNodes = formLogin
-        .getElementsByTagName("*");
 
+// getting all the child node of formLogin for enabling and disabling it in future.
+let childNodes = formLogin.getElementsByTagName("*");
+
+
+// Event listeneer for signup button
+// It will open up signup page
 btnSignup.addEventListener("click", () => {
     btnSignup.disabled = true;
     heading.innerText = "Sign up";
@@ -51,29 +56,35 @@ btnSignup.addEventListener("click", () => {
     signuppage.style.display = "inline-block";
 });
 
+
+// Event Listener for signupCancel Button
 btnSignupCancel.addEventListener("click", () => {
     signuppage.style.display = "none";
     btnSignup.disabled = false;
     heading.innerText = "Chats";
     btnLogin.disabled = false;
-    checkMark.style.visibility = 'hidden';
+    checkMark.style.visibility = "hidden";
 
     for (var node of childNodes) {
         node.disabled = false;
     }
 });
 
+// accessing username and password input field of signin page
 const signupPassword = document.getElementById("signupPassword");
 const signupUsername = document.getElementById("signupUsername");
 
+// Event Listener for signup page submit button
 formSignup.addEventListener("submit", (e) => {
     e.preventDefault();
 
     if (!signupPassword.value || !signupUsername.value) {
-        alert("Either Username or Password left BLANK");
+        alert("Password can't be Empty");
         return;
     }
 
+    //  since I am using x-www-form-urlencoded, so i have to send the params via URLSearchParams
+    // for that converting the formdata into URLSearchParams object. 
     const formdata = new FormData(formSignup);
     const params = new URLSearchParams();
 
@@ -81,6 +92,7 @@ formSignup.addEventListener("submit", (e) => {
         params.append(pair[0], pair[1]);
     }
 
+    // fetch api for async page task:- Post request to signup handler
     fetch("/signup", {
         method: "POST",
         body: params,
@@ -96,34 +108,69 @@ formSignup.addEventListener("submit", (e) => {
 });
 
 
+// Event Listener for check Available button of signup page.
 btnCheckAvail.addEventListener("click", () => {
     if (!signupUsername.value) {
-        alert("Username can't be null");
+        alert("Username can't be Empty");
     } else {
         fetch(`/check?signupUsername=${signupUsername.value}`)
-        .then((res)=>res.json())
-        .then((data)=>{
-            if(data.present == false) {
-                btnSignupSubmit.disabled = false;
-                checkMark.style.visibility = 'visible'
-                checkMark.innerHTML = '✔'
-            } else {
-                checkMark.style.visibility = 'visible'
-                checkMark.innerHTML = '✖'
-                
-            }
-        })
-        .catch((err)=>console.error(err))
-        
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.present == false) {
+                    btnSignupSubmit.disabled = false;
+                    checkMark.style.visibility = "visible";
+                    checkMark.innerHTML = "✔";
+                } else {
+                    checkMark.style.visibility = "visible";
+                    checkMark.innerHTML = "✖";
+                }
+            })
+            .catch((err) => console.error(err));
     }
 });
 
+
+// Event Listener for Login button.  
 btnLogin.addEventListener("click", () => {
+
+    const data = new FormData(formLogin);
+    const params = new URLSearchParams();
+
+    for(let pair of data){
+        if(!pair[0] || !pair[1]) {
+            alert('Both Username and Password are required');
+            return;
+        }
+        else {
+            param.append(pair[0],pair[1]);
+        }
+    }
+
+    fetch('/login',{
+        method:'post',
+        body:params,
+        headers:{
+            'Content-Type':'application/x-www-form-urlencoded',
+        },
+    }).then((res)=>res.json())
+    .then((data)=>{
+
+    })
+    .catch((err)=>console.error(err))
+
     formLogin.style.display = "none";
     btnSignup.style.display = "none";
     btnLogout.style.display = "inline-block";
+
 });
 
+
+// all socket code Here
+
+const socket = io();
+
+
+// Event Listener for Log out button 
 btnLogout.addEventListener("click", () => {
     formLogin.style.display = "inline-block";
     btnSignup.style.display = "inline-block";
