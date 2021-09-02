@@ -73,19 +73,31 @@ app.post("/login", (req, res) => {
         .catch((err) => res.status(500).send({ status: 4 }));
 });
 
+
+// Arrays for maintaing Users
+let userOnline = [];
+let userAvailable = [];
+
 // Listening for the sockets
 io.on("connection", (socket) => {
     console.log("user connected with id: ", socket.id);
 
     socket.on('logged_in',(data)=>{
         socket.join(data.user)
+        userOnline.push(data.user)
+        userAvailable.push(data.user)
         console.log(`${data.user} joined the room`);
+        io.emit('user_joined',{users:userOnline.length})
     })    
 
     socket.on('logged_out',(data)=>{
         
         // Todo  
 
+    })
+
+    socket.on('disconnected',()=>{
+        io.emit('user_disconnected',{users:userOnline.length})
     })
 });
 

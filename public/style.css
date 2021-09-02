@@ -77,6 +77,7 @@ button {
     color: #eeeeff;
     padding: 10px;
     border-radius: 5px;
+    transition-delay: 100ms;
 }
 
 .sidenav {
@@ -102,7 +103,7 @@ button {
 }
 
 .connectedTo,
-.people {
+.people{
     width: fit-content;
     background-color: #b2ffff;
     margin: 20px auto;
@@ -119,11 +120,35 @@ button {
     margin-top: 5px;
 }
 
+.goglobal {
+    position: absolute;
+    left: 55px;
+    bottom: 140px;
+    width: fit-content;
+    background-color: #b2ffff;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.goglobal > button{
+    margin: 0;
+    font-size: 18pt;
+    padding: 5px 8px;
+}
+
+.goglobal > span {
+    padding: 5px 70px 5px 40px;
+}
+
 .people {
     position: fixed;
     left: 55px;
     bottom: 20px;
     width: 230px;
+    padding: 13px 40px;
 }
 
 .people > p,

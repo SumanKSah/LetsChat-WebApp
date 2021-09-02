@@ -190,6 +190,12 @@ function userLoggedIn() {
 }
 
 // all socket code Here
+    socket.on('user_joined',(total)=>{
+        onlineUser.innerText = total.users;
+    })
+
+    socket.on('user_disconnected,')
+
 
 // Event Listener for Log out button
 btnLogout.addEventListener("click", () => {
@@ -205,6 +211,7 @@ btnLogout.addEventListener("click", () => {
 });
 
 
+// Event Listener for Next Button
 btnNext.addEventListener('click',()=>{
     btnNext.innerText = 'NEXT';
 })
