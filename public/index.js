@@ -14,7 +14,8 @@ chatList.scrollTop = chatList.scrollHeight;
 // sideNav bar elements
 const connectedUser = document.getElementById("userName");
 const btnNext = document.getElementById("nextUser");
-const availableUser = document.getElementById("availableUser");
+// const availableUser = document.getElementById("availableUser");
+const btnGoGlobal = document.getElementById('btnGoGlobal')
 const onlineUser = document.getElementById("totalOnline");
 
 // signup Menu
@@ -25,6 +26,15 @@ const formSignup = document.getElementById("userSignup");
 const btnSignupCancel = document.getElementById("signupCancel");
 const btnSignupSubmit = document.getElementById("signupSubmit");
 const checkMark = document.getElementById("checkMark");
+
+// Global User Page
+const globalUserPage = document.getElementById('globalUserPage'); 
+
+// All datastructures
+
+/*  1. Array of User 
+    2. Object of message which will have all the messages of a connection
+    3.   */
 
 // Initializing socket Port
 const socket = io();
@@ -214,4 +224,9 @@ btnLogout.addEventListener("click", () => {
 // Event Listener for Next Button
 btnNext.addEventListener('click',()=>{
     btnNext.innerText = 'NEXT';
+})
+
+btnGoGlobal.addEventListener('click',()=>{
+    heading.innerText = "Global Users";
+    globalUserPage.style.display = 'inline-block'
 })

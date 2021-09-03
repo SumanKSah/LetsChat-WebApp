@@ -47,20 +47,21 @@
         </div>
         <div class="connectedTo">
             <img src="./Images/person.png" alt="Person image" width="150" style="width: 150px; margin: 0 auto;">
-            <h3 id="userName">User Name</h3>
+            <div id="userName">User Name</div>
         </div>
         <button type="button" id="nextUser">NEXT</button>
+        <div class="connectedUsers">Connected Users</div>
 
         <div class="goglobal">
             <span>Go Global</span>
-            <button type="button" id="btnGlobal">➡</button>
+            <button type="button" id="btnGoGlobal">➡</button>
         </div>
 
         <div class="people">
-            <span>Available: </span>
+            <!--  <span>Available: </span>
             <p id="availableUser">-</p>
             <br>
-            <br>
+            <br> -->
             <span>Online: &nbsp; &nbsp; </span>
             <p id="totalOnline">-</p>
         </div>
@@ -118,7 +119,7 @@
             <input type="text" name="signupUsername" id="signupUsername" spellcheck="false">
             <button type="button" id="checkAvail">Check Available</button>
             <div style="width: 20px; height: 20px; display: inline; overflow: hidden;">
-            <span id="checkMark" style="color: green; visibility: hidden; display: inline;">✔</span>
+                <span id="checkMark" style="color: green; visibility: hidden; display: inline;">✔</span>
             </div>
             <br>
 
@@ -139,6 +140,22 @@
         </form>
     </div>
 
+    <!-- Global Users Page -->
+    <div id="globalUserPage">
+
+        <div class="userDataSection">
+
+        </div>
+        <div class="previewSection">
+
+            <div class="connectedTo">
+                <img src="./Images/person.png" alt="Person image" width="150" style="width: 150px; margin: 0 auto;">
+                <div id="userName">User Name</div>
+            </div>
+            <button type="button" id="nextUser">CONNECT</button>
+        </div>
+
+    </div>
 
 </body>
 

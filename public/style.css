@@ -17,6 +17,8 @@ button:disabled {
     opacity: 70%;
 }
 
+/* Navigation bar */
+
 .navBar {
     background-color: #b2ffff;
     height: 60px;
@@ -33,6 +35,10 @@ button:disabled {
 }
 
 .profile > p {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 200px;
     font-size: 15pt;
     margin-top: 10px;
     padding: 10px 0px;
@@ -47,7 +53,6 @@ button:disabled {
     border-top-right-radius: 20px;
     display: flex;
     margin: 0 auto;
-   
 }
 
 #logo h3 {
@@ -62,13 +67,15 @@ button:disabled {
     right: 10px;
 }
 
-.loginParam{
+.loginParam {
     width: 160px;
     padding: 5px;
     margin-right: 10px;
     border: 2px solid #318ce7;
     border-radius: 5px;
 }
+
+/* All buttons */
 
 button {
     background-color: #318ce7;
@@ -79,6 +86,8 @@ button {
     border-radius: 5px;
     transition-delay: 100ms;
 }
+
+/* Side nav */
 
 .sidenav {
     height: auto;
@@ -97,13 +106,14 @@ button {
     padding-top: 10px;
 }
 
-.sidenav #nextUser {
+#nextUser,.ConnectedUsers {
+
     width: 230px;
     margin: 5px 47px;
 }
 
 .connectedTo,
-.people{
+.people {
     width: fit-content;
     background-color: #b2ffff;
     margin: 20px auto;
@@ -114,16 +124,24 @@ button {
 }
 
 .connectedTo #userName {
-    width: fit-content;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
     font-size: 17pt;
     margin-top: 5px;
+    font-weight: bolder;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: initial;
 }
 
 .goglobal {
     position: absolute;
     left: 55px;
-    bottom: 140px;
+    bottom: 100px;
     width: fit-content;
     background-color: #b2ffff;
     display: flex;
@@ -133,7 +151,7 @@ button {
     border-radius: 10px;
 }
 
-.goglobal > button{
+.goglobal > button {
     margin: 0;
     font-size: 18pt;
     padding: 5px 8px;
@@ -162,6 +180,8 @@ span {
     position: relative;
     left: 70px;
 }
+
+/* Chats section */
 
 .chats {
     position: fixed;
@@ -227,15 +247,7 @@ span {
     overflow: auto;
 }
 
-.bottomFooter {
-    width: 100%;
-    height: 35px;
-    background-color: #b2ffff;
-    position: fixed;
-    bottom: 0px;
-    left: 340px;
-}
-
+/* Chat Message design */
 .send {
     float: right;
     clear: both;
@@ -283,13 +295,26 @@ span {
     margin-bottom: 5px;
 }
 
+/* Footer Section */
+
+.bottomFooter {
+    width: 100%;
+    height: 35px;
+    background-color: #b2ffff;
+    position: fixed;
+    bottom: 0px;
+    left: 340px;
+}
+
 .bottomFooter h3 {
     position: absolute;
     left: 35%;
     padding-top: 9px;
 }
 
-#signuppage {
+/* Signup page */
+
+#signuppage, #globalUserPage {
     display: none;
     width: 910px;
     position: absolute;
@@ -299,7 +324,7 @@ span {
     background-color: #e5e4e2;
     border-radius: 10px;
     animation-name: signupanim;
-    animation-duration: 0.5s;
+    animation-duration: 0.4s;
     animation-timing-function: linear;
 }
 
@@ -341,21 +366,37 @@ textarea {
     font-weight: bold;
 }
 
-#userSignup input[name="signupPassword"]{
+#userSignup input[name="signupPassword"] {
     margin-left: 15px;
 }
-#userSignup textarea[name="signupBio"]{
+#userSignup textarea[name="signupBio"] {
     margin-left: 68px;
     margin-bottom: 20px;
     font-family: sans-serif;
     font-size: 12pt;
 }
 
-#signupSubmit, #signupReset {
+#signupSubmit,
+#signupReset {
     float: right;
 }
 
 button:active {
     background-color: #e5e4e2;
     color: black;
+}
+
+/* Global User page */
+
+.userDataSection{
+    display: inline-block;
+    background-color: blue;
+}
+
+.previewSection {
+    background-color: black;
+    display:block;
+    width: 350px;
+    float: right;
+    height: 500px;
 }
