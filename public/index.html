@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Chat</title>
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.4/css/all.css">
     <link rel="stylesheet" href="style.css">
     <script src="/socket.io/socket.io.js"></script>
     <script defer src="./index.js"></script>
@@ -45,15 +46,6 @@
             <img src="./Images/logo.png" alt="Logo Image" width="70" style="background-color: #318CE7; ">
             <h3>Let's Chat ...</h3>
         </div>
-
-
-        <!--  <div class="connectedTo">
-            <img src="./Images/person.png" alt="Person image" width="150" style="width: 150px; margin: 0 auto;">
-            <div id="userName">User Name</div>
-        </div> -->
-        <!--<button type="button" id="nextUser">NEXT</button> -->
-
-        
 
         <div class="connectedUsers">
             <div id="title">Connected Users</div>
@@ -105,7 +97,6 @@
                 consequuntur,
                 dolores porro, dicta officia rem inventore doloremque ad atque excepturi praesentium rerum obcaecati.
                 Aut ducimus aliquam inventore assumenda modi!</div>
-
             <div class="left">User left the chat</div>
 
 
@@ -120,7 +111,12 @@
     <!-- Footer  -->
 
     <footer class="bottomFooter">
-        <h3>© Suman Kr. Sah</h3>
+        <h3>© Suman Kr. Sah &nbsp;
+            <a href="https://github.com/SumanKSah" target="_blank"><i class="fab fa-github-square"></i></a>
+            &nbsp;
+            <a href="https://www.linkedin.com/in/suman-kumar-sah-06b9b2192/" target="_blank"><i
+                    class="fab fa-linkedin"></i></a>
+        </h3>
     </footer>
 
     <!-- Signup page -->
@@ -155,7 +151,19 @@
     <div id="globalUserPage">
 
         <div class="userDataSection">
-
+            <div id="search" style="margin-left: 25px;">
+                <input type="text" id="inpSearch" spellcheck="false" placeholder="Search User">
+                <button id="btnSearch">FIND &nbsp;
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="btnCancelGlobal">CANCEL</button>
+            </div>
+            <div id="globalUserList">
+                <div class="globalUser">Bhuwan</div>
+                <div class="globalUser">SumanKSah</div>
+                <div class="globalUser">Vimal</div>
+                <div class="globalUser">Demo</div>
+            </div>
         </div>
         <div class="previewSection">
 
@@ -163,8 +171,8 @@
                 <img src="./Images/person.png" alt="Person image" width="150" style="width: 150px; margin: 0 auto;">
                 <div id="userName">User Name</div>
             </div>
-            
-            <div class="bio" >
+
+            <div class="bio">
                 <div id="title">Bio:</div>
                 <div id="description">This is a demo description of user!
                 </div>

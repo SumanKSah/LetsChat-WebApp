@@ -14,11 +14,11 @@ body {
 }
 
 /* Scroll Bar Customization */
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 10px;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: #318ce7;
 }
@@ -117,11 +117,10 @@ button {
     padding-top: 10px;
 }
 
-
-
-
 .connectedTo,
-.people, .bio , .connectedUsers > #title{
+.people,
+.bio,
+.connectedUsers > #title {
     border: 2px solid;
     width: fit-content;
     background-color: #b2ffff;
@@ -137,7 +136,8 @@ button {
     margin: 5px 47px;
 }
 
-.connectedUsers > #userList{
+.connectedUsers > #userList,
+.userDataSection > #globalUserList {
     max-height: 440px;
     overflow-y: auto;
     padding-right: 5px;
@@ -153,7 +153,8 @@ button {
     margin-bottom: 10px;
 }
 
-.connectedUsers .currentUser{
+.connectedUsers .currentUser,
+.globalUser {
     margin-bottom: 8px;
     border-left: 5px solid #318ce7;
     font-size: 15pt;
@@ -165,10 +166,10 @@ button {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
 }
 
-.connectedUsers .currentUser:hover {
+.connectedUsers .currentUser:hover,
+.globalUser:hover {
     background-color: #b2ffff;
 }
 
@@ -364,7 +365,8 @@ span {
 
 /* Signup page */
 
-#signuppage, #globalUserPage {
+#signuppage,
+#globalUserPage {
     display: none;
     width: 910px;
     position: absolute;
@@ -437,29 +439,53 @@ button:active {
 }
 
 /* Global User page */
+/* User Search Section */
 
-.userDataSection{
+.userDataSection {
     display: inline-block;
-    background-color: blue;
+    width: 560px;
+    height: 500px;
+    padding: 20px;
 }
+
+.userDataSection #inpSearch {
+    font-size: 13pt;
+    border-radius: 5px;
+    border: 2px solid #318ce7;
+    padding: 5px;
+    margin: 10px 15px;
+}
+
+.userDataSection > #globalUserList {
+    margin: 0 40px;
+    max-height: 400px;
+    padding-right: 10px;
+}
+
+.globalUser {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+/* User Preview */
 
 .previewSection {
     /* background-color: lime; */
-    display:block;
+    display: block;
     width: 350px;
     float: right;
     height: 500px;
     border: 2px dashed;
     border-radius: 10px;
 }
-.bio{
+.bio {
     position: relative;
     width: 230px;
     padding: 15px;
     padding-top: 17px;
 }
 .bio > #title {
-    background-color:#b2ffff;
+    background-color: #b2ffff;
     position: absolute;
     top: -15px;
     font-weight: bold;
@@ -477,7 +503,7 @@ button:active {
     padding-right: 5px;
 }
 
-#nextUser{
+#nextUser {
     width: 230px;
     margin: 5px 58px;
 }
