@@ -13,10 +13,16 @@ chatList.scrollTop = chatList.scrollHeight;
 
 // sideNav bar elements
 const connectedUser = document.getElementById("userName");
-const btnNext = document.getElementById("nextUser");
 // const availableUser = document.getElementById("availableUser");
 const btnGoGlobal = document.getElementById('btnGoGlobal')
 const onlineUser = document.getElementById("totalOnline");
+const currentUser = document.getElementsByClassName("currentUser");
+
+Array.from(currentUser).forEach((element)=>{
+    element.addEventListener('click',()=>{
+        alert(`Element Selected: ${element.innerText}`)
+    })
+})
 
 // signup Menu
 const heading = document.getElementById("heading");
@@ -29,6 +35,21 @@ const checkMark = document.getElementById("checkMark");
 
 // Global User Page
 const globalUserPage = document.getElementById('globalUserPage'); 
+const btnSearch = document.getElementById("btnSearch");
+const btnConnect = document.getElementById("nextUser");
+const btnCancelGlobal = document.getElementById("btnCancelGlobal");
+const globalUserList = document.getElementById("globalUserList");
+const inpSearch = document.getElementById("inpSearch");
+
+const globalUser = document.getElementsByClassName('globalUser');
+
+Array.from(globalUser).forEach(function(element){
+    element.addEventListener('click',()=>{
+        const name = element.innerText;
+        alert(`Element selected with name: ${name}`)
+    })
+})
+
 
 // All datastructures
 
@@ -44,12 +65,12 @@ function initialDisable() {
     btnSignupSubmit.disabled = true;
     btnsendMsg.disabled = true;
     inpMsg.disabled = true;
-    btnNext.disabled = true;
-    btnNext.innerText = 'CONNECT'
+    btnConnect.disabled = true;
+    btnGoGlobal.disabled = true;
 }
 
 initialDisable();
-let currentUser ='';
+let currentLoggedIn ='';
 
 
 // chatList.style.backgroundImage = "inline-block";
@@ -57,6 +78,19 @@ chatList.style.backgroundImage = "none";
 
 // getting all the child node of formLogin for enabling and disabling it in future.
 let childNodes = formLogin.getElementsByTagName("*");
+
+function disableLoginParams(toDisable) {
+    if(toDisable) {
+        for (var node of childNodes) {
+            node.disabled = true;
+        }
+    } else {
+        for (var node of childNodes) {
+            node.disabled = false;
+        }
+    }
+}
+
 
 // Event listeneer for signup button
 // It will open up signup page
@@ -66,9 +100,7 @@ btnSignup.addEventListener("click", () => {
     btnLogin.disabled = true;
     // formLogin.disabled = true;
 
-    for (var node of childNodes) {
-        node.disabled = true;
-    }
+    disableLoginParams(true);
 
     signuppage.style.display = "inline-block";
 });
@@ -81,9 +113,7 @@ btnSignupCancel.addEventListener("click", () => {
     btnLogin.disabled = false;
     checkMark.style.visibility = "hidden";
 
-    for (var node of childNodes) {
-        node.disabled = false;
-    }
+   disableLoginParams(false);
 });
 
 // accessing username and password input field of signin page
@@ -168,7 +198,7 @@ btnLogin.addEventListener("click", () => {
         .then((res) => res.json())
         .then((data) => {
             if (data.status == 3) {
-                currentUser = data.user
+                currentLoggedIn = data.user
                 user.innerHTML = `Hey, ${data.user} !!`;
                 userLoggedIn();
 
@@ -187,15 +217,16 @@ btnLogin.addEventListener("click", () => {
 });
 
 function userLoggedIn() {
-    btnNext.disabled = false;
+    // btnNext.disabled = false;
     formLogin.style.display = "none";
     btnSignup.style.display = "none";
     btnLogout.style.display = "inline-block";
+    btnGoGlobal.disabled = false;
 
     chatList.innerHTML = '';
 
     socket.emit('logged_in',{
-        user:currentUser,
+        user:currentLoggedIn,
     })
 }
 
@@ -221,12 +252,18 @@ btnLogout.addEventListener("click", () => {
 });
 
 
-// Event Listener for Next Button
-btnNext.addEventListener('click',()=>{
-    btnNext.innerText = 'NEXT';
-})
+// Global Page
 
 btnGoGlobal.addEventListener('click',()=>{
     heading.innerText = "Global Users";
     globalUserPage.style.display = 'inline-block'
+    // disableLoginParams(true);
+    btnGoGlobal.disabled = true;
+})
+
+btnCancelGlobal.addEventListener('click',()=>{
+    heading.innerText = 'Chats';
+    globalUserPage.style.display = 'none';
+    disableLoginParams(false);
+
 })
