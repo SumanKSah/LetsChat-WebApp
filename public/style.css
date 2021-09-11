@@ -288,6 +288,7 @@ span {
             rgba(255, 255, 255, 0.2)
         ),
         url("./Images/chatListBackground.png") center;
+    background-position: bottom -5px right 170px;
     background-repeat: no-repeat;
     background-size: auto 400px;
 

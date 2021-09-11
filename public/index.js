@@ -16,13 +16,9 @@ const connectedUser = document.getElementById("userName");
 // const availableUser = document.getElementById("availableUser");
 const btnGoGlobal = document.getElementById('btnGoGlobal')
 const onlineUser = document.getElementById("totalOnline");
+const userList = document.getElementById("userList");
 const currentUser = document.getElementsByClassName("currentUser");
 
-Array.from(currentUser).forEach((element)=>{
-    element.addEventListener('click',()=>{
-        alert(`Element Selected: ${element.innerText}`)
-    })
-})
 
 // signup Menu
 const heading = document.getElementById("heading");
@@ -33,6 +29,10 @@ const btnSignupCancel = document.getElementById("signupCancel");
 const btnSignupSubmit = document.getElementById("signupSubmit");
 const checkMark = document.getElementById("checkMark");
 
+// accessing username and password input field of signin page
+const signupPassword = document.getElementById("signupPassword");
+const signupUsername = document.getElementById("signupUsername");
+
 // Global User Page
 const globalUserPage = document.getElementById('globalUserPage'); 
 const btnSearch = document.getElementById("btnSearch");
@@ -40,15 +40,8 @@ const btnConnect = document.getElementById("nextUser");
 const btnCancelGlobal = document.getElementById("btnCancelGlobal");
 const globalUserList = document.getElementById("globalUserList");
 const inpSearch = document.getElementById("inpSearch");
-
+const previewSection = document.getElementsByClassName('previewSection');
 const globalUser = document.getElementsByClassName('globalUser');
-
-Array.from(globalUser).forEach(function(element){
-    element.addEventListener('click',()=>{
-        const name = element.innerText;
-        alert(`Element selected with name: ${name}`)
-    })
-})
 
 
 // All datastructures
@@ -56,6 +49,9 @@ Array.from(globalUser).forEach(function(element){
 /*  1. Array of User 
     2. Object of message which will have all the messages of a connection
     3.   */
+
+// this Object will work as a hashmap which will store userName along with their bio
+let varUserBio = {};
 
 // Initializing socket Port
 const socket = io();
@@ -67,6 +63,7 @@ function initialDisable() {
     inpMsg.disabled = true;
     btnConnect.disabled = true;
     btnGoGlobal.disabled = true;
+    previewSection[0].style.display = 'none';
 }
 
 initialDisable();
@@ -74,7 +71,7 @@ let currentLoggedIn ='';
 
 
 // chatList.style.backgroundImage = "inline-block";
-chatList.style.backgroundImage = "none";
+chatList.style.backgroundImage = "inline-block";
 
 // getting all the child node of formLogin for enabling and disabling it in future.
 let childNodes = formLogin.getElementsByTagName("*");
@@ -98,8 +95,8 @@ btnSignup.addEventListener("click", () => {
     btnSignup.disabled = true;
     heading.innerText = "Sign up";
     btnLogin.disabled = true;
-    // formLogin.disabled = true;
 
+    // formLogin.disabled = true;
     disableLoginParams(true);
 
     signuppage.style.display = "inline-block";
@@ -116,9 +113,6 @@ btnSignupCancel.addEventListener("click", () => {
    disableLoginParams(false);
 });
 
-// accessing username and password input field of signin page
-const signupPassword = document.getElementById("signupPassword");
-const signupUsername = document.getElementById("signupUsername");
 
 // Event Listener for signup page submit button
 formSignup.addEventListener("submit", (e) => {
@@ -174,6 +168,13 @@ btnCheckAvail.addEventListener("click", () => {
     }
 });
 
+const loginPassword = document.getElementById('loginPassword')
+loginPassword.addEventListener('keyup',(event)=>{
+    if(event.key === 'Enter') {
+        btnLogin.click();
+    }
+})
+
 // Event Listener for Login button.
 btnLogin.addEventListener("click", () => {
     const data = new FormData(formLogin);
@@ -224,6 +225,7 @@ function userLoggedIn() {
     btnGoGlobal.disabled = false;
 
     chatList.innerHTML = '';
+    chatList.style.backgroundImage = 'none';
 
     socket.emit('logged_in',{
         user:currentLoggedIn,
@@ -235,7 +237,9 @@ function userLoggedIn() {
         onlineUser.innerText = total.users;
     })
 
-    socket.on('user_disconnected,')
+    socket.on('user_disconnected',(data)=>{
+        onlineUser.innerText = data.users;
+    })
 
 
 // Event Listener for Log out button
@@ -261,9 +265,35 @@ btnGoGlobal.addEventListener('click',()=>{
     btnGoGlobal.disabled = true;
 })
 
+Array.from(globalUser).forEach(function(element){
+    element.addEventListener('click',()=>{
+        previewSection[0].style.display = 'inline-block';
+        const name = element.innerText;
+        btnConnect.disabled = false;
+        connectedUser.innerText = name;
+        
+    })
+})
+
+btnConnect.addEventListener('click',()=>{
+    btnConnect.disabled = true;
+    let tempUser = document.createElement('div');
+        tempUser.innerText = connectedUser.innerText;
+        tempUser.classList.add('currentUser');
+        userList.appendChild(tempUser);
+
+        Array.from(currentUser).forEach((element)=>{
+            element.addEventListener('click',()=>{
+                alert(`Element Selected: ${element.innerText}`)
+            })
+        })
+
+})
+
 btnCancelGlobal.addEventListener('click',()=>{
     heading.innerText = 'Chats';
     globalUserPage.style.display = 'none';
     disableLoginParams(false);
+    btnGoGlobal.disabled = false;
 
 })

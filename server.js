@@ -13,6 +13,9 @@ const server = http.createServer(app);
 const socketio = require("socket.io");
 const io = socketio(server);
 
+// Arrays for maintaing Users
+let userOnline = [];
+
 //fetching mongo library
 const { MongoClient } = require("mongodb");
 const mongo_URL = "mongodb://localhost:27017";
@@ -66,17 +69,22 @@ app.post("/login", (req, res) => {
     find(req.body.loginUser)
         .then((item) => {
             if (!item) res.status(200).send({ status: 1 });
-            else if (item.password == req.body.loginPassword)
+            else if (item.password == req.body.loginPassword) {
                 res.status(200).send({ status: 3, user: req.body.loginUser });
+
+                let temp = {
+                    name: req.body.loginUser,
+                    bio: item.bio,
+                }
+                userOnline.push(temp);
+            }
             else res.status(200).send({ status: 2 });
         })
         .catch((err) => res.status(500).send({ status: 4 }));
 });
 
 
-// Arrays for maintaing Users
-let userOnline = [];
-let userAvailable = [];
+
 
 // Listening for the sockets
 io.on("connection", (socket) => {
@@ -84,8 +92,6 @@ io.on("connection", (socket) => {
 
     socket.on('logged_in',(data)=>{
         socket.join(data.user)
-        userOnline.push(data.user)
-        userAvailable.push(data.user)
         console.log(`${data.user} joined the room`);
         io.emit('user_joined',{users:userOnline.length})
     })    
@@ -96,7 +102,8 @@ io.on("connection", (socket) => {
 
     })
 
-    socket.on('disconnected',()=>{
+    socket.on('disconnect',()=>{
+        console.log(socket.id, "disconnected!!");
         io.emit('user_disconnected',{users:userOnline.length})
     })
 });
