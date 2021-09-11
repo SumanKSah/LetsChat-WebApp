@@ -36,11 +36,13 @@ const signupUsername = document.getElementById("signupUsername");
 // Global User Page
 const globalUserPage = document.getElementById('globalUserPage'); 
 const btnSearch = document.getElementById("btnSearch");
+const description = document.getElementById("description");
 const btnConnect = document.getElementById("nextUser");
 const btnCancelGlobal = document.getElementById("btnCancelGlobal");
 const globalUserList = document.getElementById("globalUserList");
 const inpSearch = document.getElementById("inpSearch");
 const previewSection = document.getElementsByClassName('previewSection');
+const userDataSection = document.getElementsByClassName('userDataSection');
 const globalUser = document.getElementsByClassName('globalUser');
 
 
@@ -64,6 +66,7 @@ function initialDisable() {
     btnConnect.disabled = true;
     btnGoGlobal.disabled = true;
     previewSection[0].style.display = 'none';
+    userDataSection[0].style.marginLeft = '150px'
 }
 
 initialDisable();
@@ -233,12 +236,21 @@ function userLoggedIn() {
 }
 
 // all socket code Here
-    socket.on('user_joined',(total)=>{
-        onlineUser.innerText = total.users;
+    socket.on('user_joined',(data)=>{
+        onlineUser.innerText = data.total;
+        varUserBio[data.name] = data.bio;
+    })
+
+    socket.on('initialData',(data)=>{
+        varUserBio = data.userOnline;
+        onlineUser.innerText = Object.keys(varUserBio).length;
     })
 
     socket.on('user_disconnected',(data)=>{
         onlineUser.innerText = data.users;
+        delete varUserBio[data.name];
+
+        // ToDO message all the people who were talking with him.
     })
 
 
@@ -250,9 +262,12 @@ btnLogout.addEventListener("click", () => {
     btnSignup.style.display = "inline-block";
     btnLogout.style.display = "none";
 
-    socket.emit('logged_out',{
-        user: currentUser,
-    })
+    // socket.emit('logged_out',{
+        //     user: currentUser,
+        // })
+        
+    socket.emit('logged_out');
+
 });
 
 
@@ -263,17 +278,30 @@ btnGoGlobal.addEventListener('click',()=>{
     globalUserPage.style.display = 'inline-block'
     // disableLoginParams(true);
     btnGoGlobal.disabled = true;
-})
 
-Array.from(globalUser).forEach(function(element){
-    element.addEventListener('click',()=>{
-        previewSection[0].style.display = 'inline-block';
-        const name = element.innerText;
-        btnConnect.disabled = false;
-        connectedUser.innerText = name;
-        
+    for(let i in varUserBio) {
+        if(i == currentLoggedIn) {
+            continue;
+        }
+        let temp = document.createElement('div');
+        temp.classList.add('globalUser');
+        temp.innerText = i;
+        globalUserList.appendChild(temp);
+    }
+
+    Array.from(globalUser).forEach(function(element){
+        element.addEventListener('click',()=>{
+            userDataSection[0].style.marginLeft = '0px';
+            previewSection[0].style.display = 'inline-block';
+            const name = element.innerText;
+            btnConnect.disabled = false;
+            connectedUser.innerText = name;
+            description.innerText = varUserBio[name];
+            
+        })
     })
 })
+
 
 btnConnect.addEventListener('click',()=>{
     btnConnect.disabled = true;

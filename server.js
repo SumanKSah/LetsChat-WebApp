@@ -14,7 +14,8 @@ const socketio = require("socket.io");
 const io = socketio(server);
 
 // Arrays for maintaing Users
-let userOnline = [];
+let userOnline = {};
+let socketUserMap = {};
 
 //fetching mongo library
 const { MongoClient } = require("mongodb");
@@ -72,11 +73,7 @@ app.post("/login", (req, res) => {
             else if (item.password == req.body.loginPassword) {
                 res.status(200).send({ status: 3, user: req.body.loginUser });
 
-                let temp = {
-                    name: req.body.loginUser,
-                    bio: item.bio,
-                }
-                userOnline.push(temp);
+                userOnline[req.body.loginUser] = item.bio;
             }
             else res.status(200).send({ status: 2 });
         })
@@ -93,18 +90,34 @@ io.on("connection", (socket) => {
     socket.on('logged_in',(data)=>{
         socket.join(data.user)
         console.log(`${data.user} joined the room`);
-        io.emit('user_joined',{users:userOnline.length})
+        socketUserMap[socket.id] = data.user;
+
+        socket.broadcast.emit('user_joined',
+        {   total : Object.keys(userOnline).length,
+            name : data.user,
+            bio : userOnline[data.user]
+        })
+        // io.emit('user_joined',{users:userOnline.length})
+        socket.emit('initialData',{userOnline});
     })    
 
-    socket.on('logged_out',(data)=>{
+    socket.on('logged_out',()=>{
         
-        // Todo  
+        socket.disconnect();
 
     })
 
     socket.on('disconnect',()=>{
-        console.log(socket.id, "disconnected!!");
-        io.emit('user_disconnected',{users:userOnline.length})
+        let name = socketUserMap[socket.id];
+        if(name) { 
+            console.log(socket.id, `${name} disconnected!!`);
+            // userOnline.filter(data => data.name != socketUserMap[socket.id]);
+            delete userOnline[name];
+            delete socketUserMap[socket.id];
+
+            // user disconnected code here!!
+            io.emit('user_disconnected',{users:Object.keys(userOnline).length,name})
+        }
     })
 });
 
