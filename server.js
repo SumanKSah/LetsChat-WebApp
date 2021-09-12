@@ -101,6 +101,13 @@ io.on("connection", (socket) => {
         socket.emit('initialData',{userOnline});
     })    
 
+    socket.on('send',(data)=>{
+        io.to(data.to).emit('received',{
+            from:data.from,
+            message:data.message,
+        })
+    })
+
     socket.on('logged_out',()=>{
         
         socket.disconnect();

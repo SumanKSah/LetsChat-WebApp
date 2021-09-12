@@ -9,7 +9,10 @@ const formLogin = document.getElementById("formLogin");
 const inpMsg = document.getElementById("messageBox");
 const btnsendMsg = document.getElementById("sendMessage");
 const chatList = document.getElementById("scrl");
-chatList.scrollTop = chatList.scrollHeight;
+
+function scrollList() {
+    chatList.scrollTop = chatList.scrollHeight;
+}
 
 // sideNav bar elements
 const connectedUser = document.getElementById("userName");
@@ -54,6 +57,7 @@ const globalUser = document.getElementsByClassName('globalUser');
 
 // this Object will work as a hashmap which will store userName along with their bio
 let varUserBio = {};
+let varAllMessages ={};
 
 // Initializing socket Port
 const socket = io();
@@ -71,6 +75,8 @@ function initialDisable() {
 
 initialDisable();
 let currentLoggedIn ='';
+let currentTalkingWith ='';
+let varPreviousPerson;
 
 
 // chatList.style.backgroundImage = "inline-block";
@@ -253,6 +259,58 @@ function userLoggedIn() {
         // ToDO message all the people who were talking with him.
     })
 
+    socket.on('received',(data)=>{
+        if(data.from == currentTalkingWith){
+            let temp = document.createElement('div');
+            temp.classList.add('received');
+            temp.innerText = data.message;
+            chatList.appendChild(temp);
+
+            scrollList();
+        }
+
+        if(!varAllMessages[data.from]){
+            varAllMessages[data.from]=[];
+        }
+        varAllMessages[data.from].push({
+            type:'received',
+            message:data.message,
+        })
+    })
+
+inpMsg.addEventListener('keyup',(event)=>{
+    if(event.key === 'Enter') {
+        btnsendMsg.click();
+    }
+})
+
+btnsendMsg.addEventListener('click',()=>{
+    // Handle Messages Here
+
+    if(inpMsg.value == ''){
+        return;
+    }
+
+    socket.emit('send',{
+        to:currentTalkingWith,
+        from:currentLoggedIn,
+        message:inpMsg.value,
+    })
+
+    let temp = document.createElement('div');
+    temp.classList.add('send');
+    temp.innerText = inpMsg.value;
+    chatList.appendChild(temp);
+    
+    scrollList();
+
+    varAllMessages[currentTalkingWith].push({
+        type:'send',
+        message:inpMsg.value,
+    })
+
+    inpMsg.value = '';
+})
 
 // Event Listener for Log out button
 btnLogout.addEventListener("click", () => {
@@ -261,10 +319,6 @@ btnLogout.addEventListener("click", () => {
     formLogin.style.display = "inline-block";
     btnSignup.style.display = "inline-block";
     btnLogout.style.display = "none";
-
-    // socket.emit('logged_out',{
-        //     user: currentUser,
-        // })
         
     socket.emit('logged_out');
 
@@ -312,7 +366,34 @@ btnConnect.addEventListener('click',()=>{
 
         Array.from(currentUser).forEach((element)=>{
             element.addEventListener('click',()=>{
-                alert(`Element Selected: ${element.innerText}`)
+                // alert(`Element Selected: ${element.innerText}`)
+                inpMsg.disabled = false;
+                btnsendMsg.disabled = false;
+                inpMsg.focus();
+                currentTalkingWith = element.innerText;
+
+                if(varPreviousPerson) {
+                    varPreviousPerson.style.fontWeight = 'normal';
+                }
+
+                element.style.fontWeight = 'bold';
+                varPreviousPerson = element;
+
+                if(!varAllMessages[currentTalkingWith]) {
+                    varAllMessages[currentTalkingWith]=[];
+                }
+                chatList.innerHTML='';
+                for(let item of varAllMessages[currentTalkingWith]){
+                    let temp = document.createElement('div');
+                    temp.innerText = item.message;
+                    chatList.appendChild(temp);
+                    if(item.type == 'send'){
+                        temp.classList.add('send')
+                    }else {
+                        temp.classList.add('received');
+                    }
+                }
+                scrollList();
             })
         })
 
