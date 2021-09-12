@@ -265,8 +265,7 @@ socket.on("received", (data) => {
         scrollList();
     }
 
-    if (!varAllMessages[data.from]) {
-        varAllMessages[data.from] = [];
+    if (varJoinedUser.indexOf(data.from) == -1) {
 
         let tempUser = document.createElement("div");
         tempUser.innerText = data.from;
@@ -276,6 +275,17 @@ socket.on("received", (data) => {
 
         currentUserListener();
     }
+
+    Array.from(currentUser).forEach((element)=>{
+        if(element.innerText == data.from && element.innerText != currentTalkingWith) {
+            element.style.color = 'red';
+        }
+    })
+
+    if(!varAllMessages[data.from]){
+        varAllMessages[data.from] = [];
+    }
+
     varAllMessages[data.from].push({
         type: "received",
         message: data.message,
@@ -368,6 +378,11 @@ btnConnect.addEventListener("click", () => {
     let tempUser = document.createElement("div");
     tempUser.innerText = connectedUser.innerText;
     varJoinedUser.push(connectedUser.innerText);
+
+   /* if(varJoinedUser.indexOf(connectedUser.innerText) == -1) {
+        varAllMessages[connectedUser.innerText] =[];
+    } */
+
     tempUser.classList.add("currentUser");
     userList.appendChild(tempUser);
 
@@ -386,7 +401,7 @@ function currentUserListener() {
             if (varPreviousPerson) {
                 varPreviousPerson.style.fontWeight = "normal";
             }
-
+            element.style.color = 'black';
             element.style.fontWeight = "bold";
             varPreviousPerson = element;
 
@@ -420,6 +435,5 @@ btnCancelGlobal.addEventListener("click", () => {
 
 // ToDo:
 /*
-    1. Unread Messages 
-    2. Handling User Disconnection in client side.
+    1. Handling User Disconnection in client side.
  */
