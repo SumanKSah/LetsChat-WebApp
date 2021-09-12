@@ -17,11 +17,10 @@ function scrollList() {
 // sideNav bar elements
 const connectedUser = document.getElementById("userName");
 // const availableUser = document.getElementById("availableUser");
-const btnGoGlobal = document.getElementById('btnGoGlobal')
+const btnGoGlobal = document.getElementById("btnGoGlobal");
 const onlineUser = document.getElementById("totalOnline");
 const userList = document.getElementById("userList");
 const currentUser = document.getElementsByClassName("currentUser");
-
 
 // signup Menu
 const heading = document.getElementById("heading");
@@ -37,17 +36,16 @@ const signupPassword = document.getElementById("signupPassword");
 const signupUsername = document.getElementById("signupUsername");
 
 // Global User Page
-const globalUserPage = document.getElementById('globalUserPage'); 
+const globalUserPage = document.getElementById("globalUserPage");
 const btnSearch = document.getElementById("btnSearch");
 const description = document.getElementById("description");
 const btnConnect = document.getElementById("nextUser");
 const btnCancelGlobal = document.getElementById("btnCancelGlobal");
 const globalUserList = document.getElementById("globalUserList");
 const inpSearch = document.getElementById("inpSearch");
-const previewSection = document.getElementsByClassName('previewSection');
-const userDataSection = document.getElementsByClassName('userDataSection');
-const globalUser = document.getElementsByClassName('globalUser');
-
+const previewSection = document.getElementsByClassName("previewSection");
+const userDataSection = document.getElementsByClassName("userDataSection");
+const globalUser = document.getElementsByClassName("globalUser");
 
 // All datastructures
 
@@ -57,7 +55,8 @@ const globalUser = document.getElementsByClassName('globalUser');
 
 // this Object will work as a hashmap which will store userName along with their bio
 let varUserBio = {};
-let varAllMessages ={};
+let varAllMessages = {};
+let varJoinedUser = [];
 
 // Initializing socket Port
 const socket = io();
@@ -69,15 +68,14 @@ function initialDisable() {
     inpMsg.disabled = true;
     btnConnect.disabled = true;
     btnGoGlobal.disabled = true;
-    previewSection[0].style.display = 'none';
-    userDataSection[0].style.marginLeft = '150px'
+    previewSection[0].style.display = "none";
+    userDataSection[0].style.marginLeft = "150px";
 }
 
 initialDisable();
-let currentLoggedIn ='';
-let currentTalkingWith ='';
+let currentLoggedIn = "";
+let currentTalkingWith = "";
 let varPreviousPerson;
-
 
 // chatList.style.backgroundImage = "inline-block";
 chatList.style.backgroundImage = "inline-block";
@@ -86,7 +84,7 @@ chatList.style.backgroundImage = "inline-block";
 let childNodes = formLogin.getElementsByTagName("*");
 
 function disableLoginParams(toDisable) {
-    if(toDisable) {
+    if (toDisable) {
         for (var node of childNodes) {
             node.disabled = true;
         }
@@ -96,7 +94,6 @@ function disableLoginParams(toDisable) {
         }
     }
 }
-
 
 // Event listeneer for signup button
 // It will open up signup page
@@ -119,9 +116,8 @@ btnSignupCancel.addEventListener("click", () => {
     btnLogin.disabled = false;
     checkMark.style.visibility = "hidden";
 
-   disableLoginParams(false);
+    disableLoginParams(false);
 });
-
 
 // Event Listener for signup page submit button
 formSignup.addEventListener("submit", (e) => {
@@ -177,12 +173,12 @@ btnCheckAvail.addEventListener("click", () => {
     }
 });
 
-const loginPassword = document.getElementById('loginPassword')
-loginPassword.addEventListener('keyup',(event)=>{
-    if(event.key === 'Enter') {
+const loginPassword = document.getElementById("loginPassword");
+loginPassword.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
         btnLogin.click();
     }
-})
+});
 
 // Event Listener for Login button.
 btnLogin.addEventListener("click", () => {
@@ -208,7 +204,7 @@ btnLogin.addEventListener("click", () => {
         .then((res) => res.json())
         .then((data) => {
             if (data.status == 3) {
-                currentLoggedIn = data.user
+                currentLoggedIn = data.user;
                 user.innerHTML = `Hey, ${data.user} !!`;
                 userLoggedIn();
 
@@ -233,84 +229,92 @@ function userLoggedIn() {
     btnLogout.style.display = "inline-block";
     btnGoGlobal.disabled = false;
 
-    chatList.innerHTML = '';
-    chatList.style.backgroundImage = 'none';
+    chatList.innerHTML = "";
+    chatList.style.backgroundImage = "none";
 
-    socket.emit('logged_in',{
-        user:currentLoggedIn,
-    })
+    socket.emit("logged_in", {
+        user: currentLoggedIn,
+    });
 }
 
 // all socket code Here
-    socket.on('user_joined',(data)=>{
-        onlineUser.innerText = data.total;
-        varUserBio[data.name] = data.bio;
-    })
+socket.on("user_joined", (data) => {
+    onlineUser.innerText = data.total;
+    varUserBio[data.name] = data.bio;
+});
 
-    socket.on('initialData',(data)=>{
-        varUserBio = data.userOnline;
-        onlineUser.innerText = Object.keys(varUserBio).length;
-    })
+socket.on("initialData", (data) => {
+    varUserBio = data.userOnline;
+    onlineUser.innerText = Object.keys(varUserBio).length;
+});
 
-    socket.on('user_disconnected',(data)=>{
-        onlineUser.innerText = data.users;
-        delete varUserBio[data.name];
+socket.on("user_disconnected", (data) => {
+    onlineUser.innerText = data.users;
+    delete varUserBio[data.name];
 
-        // ToDO message all the people who were talking with him.
-    })
+    // ToDO message all the people who were talking with him.
+});
 
-    socket.on('received',(data)=>{
-        if(data.from == currentTalkingWith){
-            let temp = document.createElement('div');
-            temp.classList.add('received');
-            temp.innerText = data.message;
-            chatList.appendChild(temp);
+socket.on("received", (data) => {
+    if (data.from == currentTalkingWith) {
+        let temp = document.createElement("div");
+        temp.classList.add("received");
+        temp.innerText = data.message;
+        chatList.appendChild(temp);
 
-            scrollList();
-        }
+        scrollList();
+    }
 
-        if(!varAllMessages[data.from]){
-            varAllMessages[data.from]=[];
-        }
-        varAllMessages[data.from].push({
-            type:'received',
-            message:data.message,
-        })
-    })
+    if (!varAllMessages[data.from]) {
+        varAllMessages[data.from] = [];
 
-inpMsg.addEventListener('keyup',(event)=>{
-    if(event.key === 'Enter') {
+        let tempUser = document.createElement("div");
+        tempUser.innerText = data.from;
+        varJoinedUser.push(data.from);
+        tempUser.classList.add("currentUser");
+        userList.appendChild(tempUser);
+
+        currentUserListener();
+    }
+    varAllMessages[data.from].push({
+        type: "received",
+        message: data.message,
+    });
+});
+
+inpMsg.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
         btnsendMsg.click();
     }
-})
+});
 
-btnsendMsg.addEventListener('click',()=>{
+btnsendMsg.addEventListener("click", () => {
     // Handle Messages Here
 
-    if(inpMsg.value == ''){
+    if (inpMsg.value == "") {
         return;
     }
 
-    socket.emit('send',{
-        to:currentTalkingWith,
-        from:currentLoggedIn,
-        message:inpMsg.value,
-    })
+    socket.emit("send", {
+        to: currentTalkingWith,
+        from: currentLoggedIn,
+        message: inpMsg.value,
+    });
 
-    let temp = document.createElement('div');
-    temp.classList.add('send');
+    let temp = document.createElement("div");
+    temp.classList.add("send");
     temp.innerText = inpMsg.value;
     chatList.appendChild(temp);
-    
+
     scrollList();
 
     varAllMessages[currentTalkingWith].push({
-        type:'send',
-        message:inpMsg.value,
-    })
+        type: "send",
+        message: inpMsg.value,
+    });
 
-    inpMsg.value = '';
-})
+    inpMsg.value = "";
+});
 
 // Event Listener for Log out button
 btnLogout.addEventListener("click", () => {
@@ -319,90 +323,103 @@ btnLogout.addEventListener("click", () => {
     formLogin.style.display = "inline-block";
     btnSignup.style.display = "inline-block";
     btnLogout.style.display = "none";
-        
-    socket.emit('logged_out');
 
+    socket.emit("logged_out");
 });
-
 
 // Global Page
 
-btnGoGlobal.addEventListener('click',()=>{
+btnGoGlobal.addEventListener("click", () => {
     heading.innerText = "Global Users";
-    globalUserPage.style.display = 'inline-block'
+    globalUserPage.style.display = "inline-block";
     // disableLoginParams(true);
     btnGoGlobal.disabled = true;
 
-    for(let i in varUserBio) {
-        if(i == currentLoggedIn) {
+    globalUserList.innerHTML = "";
+
+    for (let i in varUserBio) {
+        if (i == currentLoggedIn || varJoinedUser.indexOf(i) != -1) {
             continue;
         }
-        let temp = document.createElement('div');
-        temp.classList.add('globalUser');
+
+        let temp = document.createElement("div");
+        temp.classList.add("globalUser");
         temp.innerText = i;
         globalUserList.appendChild(temp);
     }
 
-    Array.from(globalUser).forEach(function(element){
-        element.addEventListener('click',()=>{
-            userDataSection[0].style.marginLeft = '0px';
-            previewSection[0].style.display = 'inline-block';
+    Array.from(globalUser).forEach(function (element) {
+        element.addEventListener("click", () => {
+            userDataSection[0].style.marginLeft = "0px";
+            previewSection[0].style.display = "inline-block";
             const name = element.innerText;
-            btnConnect.disabled = false;
+
+            if(varJoinedUser.indexOf(element.innerText) == -1) {
+                btnConnect.disabled = false;
+            }
             connectedUser.innerText = name;
             description.innerText = varUserBio[name];
-            
-        })
-    })
-})
+        });
+    });
+});
 
-
-btnConnect.addEventListener('click',()=>{
+btnConnect.addEventListener("click", () => {
     btnConnect.disabled = true;
-    let tempUser = document.createElement('div');
-        tempUser.innerText = connectedUser.innerText;
-        tempUser.classList.add('currentUser');
-        userList.appendChild(tempUser);
+    let tempUser = document.createElement("div");
+    tempUser.innerText = connectedUser.innerText;
+    varJoinedUser.push(connectedUser.innerText);
+    tempUser.classList.add("currentUser");
+    userList.appendChild(tempUser);
 
-        Array.from(currentUser).forEach((element)=>{
-            element.addEventListener('click',()=>{
-                // alert(`Element Selected: ${element.innerText}`)
-                inpMsg.disabled = false;
-                btnsendMsg.disabled = false;
-                inpMsg.focus();
-                currentTalkingWith = element.innerText;
+    currentUserListener();
+});
 
-                if(varPreviousPerson) {
-                    varPreviousPerson.style.fontWeight = 'normal';
+function currentUserListener() {
+    Array.from(currentUser).forEach((element) => {
+        element.addEventListener("click", () => {
+            // alert(`Element Selected: ${element.innerText}`)
+            inpMsg.disabled = false;
+            btnsendMsg.disabled = false;
+            inpMsg.focus();
+            currentTalkingWith = element.innerText;
+
+            if (varPreviousPerson) {
+                varPreviousPerson.style.fontWeight = "normal";
+            }
+
+            element.style.fontWeight = "bold";
+            varPreviousPerson = element;
+
+            if (!varAllMessages[currentTalkingWith]) {
+                varAllMessages[currentTalkingWith] = [];
+            }
+            chatList.innerHTML = "";
+            for (let item of varAllMessages[currentTalkingWith]) {
+                let temp = document.createElement("div");
+                temp.innerText = item.message;
+                chatList.appendChild(temp);
+                if (item.type == "send") {
+                    temp.classList.add("send");
+                } else if (item.type == "received") {
+                    temp.classList.add("received");
+                }else {
+                    temp.classList.add('left');
                 }
+            }
+            scrollList();
+        });
+    });
+}
 
-                element.style.fontWeight = 'bold';
-                varPreviousPerson = element;
-
-                if(!varAllMessages[currentTalkingWith]) {
-                    varAllMessages[currentTalkingWith]=[];
-                }
-                chatList.innerHTML='';
-                for(let item of varAllMessages[currentTalkingWith]){
-                    let temp = document.createElement('div');
-                    temp.innerText = item.message;
-                    chatList.appendChild(temp);
-                    if(item.type == 'send'){
-                        temp.classList.add('send')
-                    }else {
-                        temp.classList.add('received');
-                    }
-                }
-                scrollList();
-            })
-        })
-
-})
-
-btnCancelGlobal.addEventListener('click',()=>{
-    heading.innerText = 'Chats';
-    globalUserPage.style.display = 'none';
+btnCancelGlobal.addEventListener("click", () => {
+    heading.innerText = "Chats";
+    globalUserPage.style.display = "none";
     disableLoginParams(false);
     btnGoGlobal.disabled = false;
+});
 
-})
+// ToDo:
+/*
+    1. Unread Messages 
+    2. Handling User Disconnection in client side.
+ */
