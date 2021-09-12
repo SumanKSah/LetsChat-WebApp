@@ -208,9 +208,9 @@ btnLogin.addEventListener("click", () => {
                 user.innerHTML = `Hey, ${data.user} !!`;
                 userLoggedIn();
 
-                socket.emit("login_success", {
+                /* socket.emit("login_success", {
                     user: data.user,
-                });
+                }); */
             } else if (data.status == 1) {
                 alert("Not a VALID user");
             } else {
@@ -252,6 +252,19 @@ socket.on("user_disconnected", (data) => {
     onlineUser.innerText = data.users;
     delete varUserBio[data.name];
 
+    if (varJoinedUser.indexOf(data.name) != -1) {
+        varAllMessages[data.name].push({
+            type: "left",
+            message: `${data.name} left the chat`,
+        });
+
+        if (data.name == currentTalkingWith) {
+            let temp = document.createElement("div");
+            temp.innerText = `${data.name} left the chat`;
+            temp.classList.add("left");
+            chatList.appendChild(temp);
+        }
+    }
     // ToDO message all the people who were talking with him.
 });
 
@@ -266,7 +279,6 @@ socket.on("received", (data) => {
     }
 
     if (varJoinedUser.indexOf(data.from) == -1) {
-
         let tempUser = document.createElement("div");
         tempUser.innerText = data.from;
         varJoinedUser.push(data.from);
@@ -276,13 +288,16 @@ socket.on("received", (data) => {
         currentUserListener();
     }
 
-    Array.from(currentUser).forEach((element)=>{
-        if(element.innerText == data.from && element.innerText != currentTalkingWith) {
-            element.style.color = 'red';
+    Array.from(currentUser).forEach((element) => {
+        if (
+            element.innerText == data.from &&
+            element.innerText != currentTalkingWith
+        ) {
+            element.style.color = "red";
         }
-    })
+    });
 
-    if(!varAllMessages[data.from]){
+    if (!varAllMessages[data.from]) {
         varAllMessages[data.from] = [];
     }
 
@@ -334,6 +349,15 @@ btnLogout.addEventListener("click", () => {
     btnSignup.style.display = "inline-block";
     btnLogout.style.display = "none";
 
+    userList.innerHTML = "";
+    chatList.innerHTML = "";
+    varAllMessages = {};
+    varJoinedUser = [];
+    varUserBio = {};
+    varPreviousPerson = "";
+    currentTalkingWith = "";
+    currentLoggedIn = "";
+
     socket.emit("logged_out");
 });
 
@@ -364,7 +388,7 @@ btnGoGlobal.addEventListener("click", () => {
             previewSection[0].style.display = "inline-block";
             const name = element.innerText;
 
-            if(varJoinedUser.indexOf(element.innerText) == -1) {
+            if (varJoinedUser.indexOf(element.innerText) == -1) {
                 btnConnect.disabled = false;
             }
             connectedUser.innerText = name;
@@ -379,9 +403,9 @@ btnConnect.addEventListener("click", () => {
     tempUser.innerText = connectedUser.innerText;
     varJoinedUser.push(connectedUser.innerText);
 
-   /* if(varJoinedUser.indexOf(connectedUser.innerText) == -1) {
-        varAllMessages[connectedUser.innerText] =[];
-    } */
+    if (!varAllMessages[connectedUser.innerText]) {
+        varAllMessages[connectedUser.innerText] = [];
+    }
 
     tempUser.classList.add("currentUser");
     userList.appendChild(tempUser);
@@ -401,7 +425,7 @@ function currentUserListener() {
             if (varPreviousPerson) {
                 varPreviousPerson.style.fontWeight = "normal";
             }
-            element.style.color = 'black';
+            element.style.color = "black";
             element.style.fontWeight = "bold";
             varPreviousPerson = element;
 
@@ -417,8 +441,8 @@ function currentUserListener() {
                     temp.classList.add("send");
                 } else if (item.type == "received") {
                     temp.classList.add("received");
-                }else {
-                    temp.classList.add('left');
+                } else {
+                    temp.classList.add("left");
                 }
             }
             scrollList();
@@ -433,7 +457,4 @@ btnCancelGlobal.addEventListener("click", () => {
     btnGoGlobal.disabled = false;
 });
 
-// ToDo:
-/*
-    1. Handling User Disconnection in client side.
- */
+// THE END
