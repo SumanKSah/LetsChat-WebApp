@@ -58,6 +58,25 @@ let varUserBio = {};
 let varAllMessages = {};
 let varJoinedUser = [];
 
+let varInitalDemoMessage = [
+    {
+        type : "send",
+        message : "Hey!!"
+    },
+    {
+        type : "received",
+        message : "Hello"
+    },
+    {
+        type : "received",
+        message : "How you doing?"
+    },
+    {
+        type : "left",
+        message : "User left the chat"
+    }
+];
+
 // Initializing socket Port
 const socket = io();
 
@@ -230,7 +249,8 @@ function userLoggedIn() {
     btnGoGlobal.disabled = false;
 
     chatList.innerHTML = "";
-    chatList.style.backgroundImage = "none";
+    // chatList.style.backgroundImage = "none";
+    chatList.style.backgroundSize = "0 0";
 
     socket.emit("logged_in", {
         user: currentLoggedIn,
@@ -268,8 +288,13 @@ socket.on("user_disconnected", (data) => {
     // ToDO message all the people who were talking with him.
 });
 
+const audioLive = document.getElementById('audioLive');
+const audioOther = document.getElementById('audioOther');
+const audioSent = document.getElementById('audioSent');
+
 socket.on("received", (data) => {
     if (data.from == currentTalkingWith) {
+        audioLive.play();
         let temp = document.createElement("div");
         temp.classList.add("received");
         temp.innerText = data.message;
@@ -293,6 +318,7 @@ socket.on("received", (data) => {
             element.innerText == data.from &&
             element.innerText != currentTalkingWith
         ) {
+            audioOther.play();
             element.style.color = "red";
         }
     });
@@ -319,12 +345,13 @@ btnsendMsg.addEventListener("click", () => {
     if (inpMsg.value == "") {
         return;
     }
-
     socket.emit("send", {
         to: currentTalkingWith,
         from: currentLoggedIn,
         message: inpMsg.value,
     });
+
+    audioSent.play();
 
     let temp = document.createElement("div");
     temp.classList.add("send");
@@ -351,6 +378,16 @@ btnLogout.addEventListener("click", () => {
 
     userList.innerHTML = "";
     chatList.innerHTML = "";
+
+    // Loding demo chats
+    for(let item of varInitalDemoMessage){
+        let temp = document.createElement('div');
+        temp.classList.add(item.type);
+        temp.innerText = item.message;
+        chatList.appendChild(temp);
+    }
+
+    chatList.style.backgroundSize = "auto 400px";
     varAllMessages = {};
     varJoinedUser = [];
     varUserBio = {};
