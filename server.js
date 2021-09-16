@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+const PORT = process.env.PORT || 8000;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/", express.static(__dirname + "/public"));
@@ -19,7 +21,7 @@ let socketUserMap = {};
 
 //fetching mongo library
 const { MongoClient } = require("mongodb");
-const mongo_URL = "mongodb://localhost:27017";
+const mongo_URL = "mongodb+srv://chatuser:chatuserpass@chat-cluster.95kp3.mongodb.net/letschat?retryWrites=true&w=majority";
 const DB_name = "letschat";
 let userCollection;
 
@@ -138,6 +140,6 @@ io.on("connection", (socket) => {
 });
 
 // Listening on http made server
-server.listen(8000, () => {
-    console.log("Server started at http://localhost:8000");
+server.listen(PORT, () => {
+    console.log(`Server started at http://localhost:${PORT}`);
 });
