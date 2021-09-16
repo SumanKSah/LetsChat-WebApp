@@ -3,7 +3,9 @@
 It's a Real-time chat web-application made using HTML, CSS and JavaScript for Frontend, mongodb for Database and Express.js for Backend.
 
 This is a fully asynchronized website made using vanilla JavaScript(ES6). <br>
-Used fetch api for all the calls made to the server.
+Used fetch api for all the calls made to the server. <br><br>
+
+Check this out: **[https://letschat-sumanksah.herokuapp.com](https://letschat-sumanksah.herokuapp.com/)** <br>
 
 ## Libraries Used: 
 &emsp; 1. mongodb - for handling CRUD operation <br>
@@ -36,6 +38,10 @@ Used fetch api for all the calls made to the server.
 
 ### Chat Window 
 ![Signup Page](READMEimages/chatWindow.png) <br>
+
+## TODO:
+&emsp; * Secure Database. <br>
+&emsp; * Encrypt Password before sending to the server.
 
 ### Thank You!!
 <hr>
