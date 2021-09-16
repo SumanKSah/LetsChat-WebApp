@@ -10,6 +10,8 @@ app.use("/", express.static(__dirname + "/public"));
 // http for socket
 const http = require("http");
 const server = http.createServer(app);
+const dotParams = require('dotenv');
+dotParams.config({path: './routes/.env'});
 
 // fetching socket library
 const socketio = require("socket.io");
@@ -21,7 +23,7 @@ let socketUserMap = {};
 
 //fetching mongo library
 const { MongoClient } = require("mongodb");
-const mongo_URL = "mongodb+srv://chatuser:chatuserpass@chat-cluster.95kp3.mongodb.net/letschat?retryWrites=true&w=majority";
+const mongo_URL = process.env.MONGO_URL;
 const DB_name = "letschat";
 let userCollection;
 

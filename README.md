@@ -40,6 +40,7 @@ Check this out: **[https://letschat-sumanksah.herokuapp.com](https://letschat-su
 ![Signup Page](READMEimages/chatWindow.png) <br>
 
 ## TODO:
+&emsp; * Work on responsive view.
 &emsp; * Secure Database. <br>
 &emsp; * Encrypt Password before sending to the server.
 
