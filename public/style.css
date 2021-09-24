@@ -49,7 +49,7 @@ button:disabled {
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 20.0rem;
-    font-size: 15pt;
+    font-size: 2.0rem;
     margin-top: 1.0rem;
     padding: 1.0rem 0rem;
     display: inline-block;
@@ -66,7 +66,7 @@ button:disabled {
 }
 
 #logo h3 {
-    font-size: 20pt;
+    font-size: 2.667rem;
     padding: 1.2rem 3.0rem;
     display: inline-block;
 }
@@ -150,7 +150,7 @@ button {
     border: none;
     width: 23.0rem;
     padding: .8rem 1.0rem .8rem 4.0rem;
-    font-size: 15pt;
+    font-size: 2.0rem;
     font-weight: bold;
     margin-bottom: 1.0rem;
 }
@@ -159,7 +159,7 @@ button {
 .globalUser {
     margin-bottom: .8rem;
     border-left: .5rem solid #318ce7;
-    font-size: 15pt;
+    font-size: 2.0rem;
     padding: .5rem;
     cursor: pointer;
     border-top-right-radius: .8rem;
@@ -181,7 +181,7 @@ button {
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    font-size: 17pt;
+    font-size: 2.2667rem;
     margin-top: .5rem;
     font-weight: bolder;
 
@@ -205,7 +205,7 @@ button {
 
 .goglobal > button {
     margin: 0;
-    font-size: 18pt;
+    font-size: 2.4rem;
     padding: .5rem .8rem;
 }
 
@@ -226,7 +226,7 @@ button {
 span {
     display: inline-block;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 1.8667rem;
 }
 
 .people > p {
@@ -258,7 +258,7 @@ span {
 
 .chats .messageDiv #messageBox {
     width: 60.0rem;
-    height: 26pt;
+    height: 3.4667rem;
     font-size: 1.6rem;
     padding: 0 1.0rem;
     margin: 1.5rem 2.0rem;
@@ -272,7 +272,7 @@ span {
 .chatList,
 .chats > .top {
     height: auto;
-    font-size: 18pt;
+    font-size: 2.4rem;
     font-weight: bold;
     padding: 1.0rem;
     margin: 1.0rem 11.0rem;
@@ -313,7 +313,7 @@ span {
     right: 1.5rem;
     padding: .5rem 1.5rem;
     border-radius: .5rem;
-    font-size: 13pt;
+    font-size: 1.733rem;
     font-weight: normal;
     margin-bottom: .5rem;
 }
@@ -327,7 +327,7 @@ span {
     right: 1.5rem;
     padding: .3rem 1.2rem;
     border-radius: .5rem;
-    font-size: 10pt;
+    font-size: 1.333rem;
     font-weight: normal;
     font-style: italic;
     margin-bottom: .5rem;
@@ -345,7 +345,7 @@ span {
     left: 1.5rem;
     padding: .5rem 1.5rem;
     border-radius: .5rem;
-    font-size: 13pt;
+    font-size: 1.733rem;
     font-weight: normal;
     margin-bottom: .5rem;
 }
@@ -368,7 +368,7 @@ span {
     padding-top: .9rem;
 }
 
-.bottomFooter .fab {
+.bottomFooter .fab, .fas {
     font-size: 1.6rem;
 }
 
@@ -424,7 +424,7 @@ textarea {
 }
 
 #userSignup label {
-    font-size: 15pt;
+    font-size: 2.0rem;
     font-weight: bold;
 }
 
@@ -435,7 +435,7 @@ textarea {
     margin-left: 6.8rem;
     margin-bottom: 2.0rem;
     font-family: sans-serif;
-    font-size: 12pt;
+    font-size: 1.6rem;
 }
 
 #signupSubmit,
@@ -459,7 +459,7 @@ button:active {
 }
 
 .userDataSection #inpSearch {
-    font-size: 13pt;
+    font-size: 1.733rem;
     border-radius: .5rem;
     border: .2rem solid #318ce7;
     padding: .5rem;
@@ -499,7 +499,7 @@ button:active {
     position: absolute;
     top: -1.5rem;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 1.8667rem;
     left: 1.5rem;
     padding: .2rem .4rem;
     border: .2rem solid;
