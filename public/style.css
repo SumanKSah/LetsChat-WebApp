@@ -3,6 +3,8 @@
     padding: 0;
     border: 0;
     outline: 0;
+    /* padding: 62.5%;
+    margin: 62.5%; */
     font-size: 62.5%;
     vertical-align: baseline;
     box-sizing: border-box;
@@ -239,7 +241,7 @@ span {
 .chats {
     position: fixed;
     height: auto;
-    width: auto;
+    width: calc(100vw - 35rem);
     top: 6.0rem;
     left: 35.0rem;
     bottom: 4.5rem;
@@ -249,9 +251,10 @@ span {
 .chats .messageDiv {
     position: fixed;
     bottom: 4.5rem;
-    left: 56.0rem;
+    left: calc((100vw - 35rem)/2);
+    margin: 0rem auto;
     border-radius: 1.0rem;
-    right: 1.0rem;
+    /* right: 1.0rem; */
     width: fit-content;
     background-color: #e5e4e2;
 }
@@ -275,7 +278,8 @@ span {
     font-size: 2.4rem;
     font-weight: bold;
     padding: 1.0rem;
-    margin: 1.0rem 11.0rem;
+    /* margin: 1.0rem 11.0rem; */
+    margin: 1.0rem auto;
     width: 94.0rem;
     border-radius: 1.0rem;
     background-color: #e5e4e2;
@@ -296,7 +300,8 @@ span {
     background-size: auto 40.0rem;
 
     background-color: transparent;
-    height: 51.0rem;
+    /* height: 51.0rem; */
+    height: 75%;
     border-left: #b2ffff .5rem solid;
     border-right: #b2ffff .5rem solid;
     overflow: auto;
@@ -517,4 +522,17 @@ button:active {
 #nextUser {
     width: 23.0rem;
     margin: .5rem 5.8rem;
+}
+
+/* Media queries for responsive */
+@media (max-width : 1024px) {
+    *{
+        font-size: 58%;
+    }
+}
+
+@media (max-width: 768px) {
+    *{
+        font-size: 50%;
+    }
 }
