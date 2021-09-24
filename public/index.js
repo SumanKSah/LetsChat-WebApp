@@ -423,6 +423,7 @@ btnGoGlobal.addEventListener("click", () => {
         element.addEventListener("click", () => {
             userDataSection[0].style.marginLeft = "0px";
             previewSection[0].style.display = "inline-block";
+            previewSection.scrollTop = previewSection.scrollHeight;
             const name = element.innerText;
 
             if (varJoinedUser.indexOf(element.innerText) == -1) {
