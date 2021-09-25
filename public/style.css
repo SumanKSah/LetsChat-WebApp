@@ -16,19 +16,21 @@ body {
 }
 
 :root {
-    --sidewidth : 35.0rem;
-    --chatListWidth : 94.0rem;
-    --previewSectionWidth : 35rem;
-    --userDataSectonWidth : calc(var(--chatListWidth) - var(--previewSectionWidth) -2rem);
+    --sidewidth: 35rem;
+    --chatListWidth: 94rem;
+    --previewSectionWidth: 35rem;
+    --userDataSectonWidth: calc(
+        var(--chatListWidth) - var(--previewSectionWidth) -
+    );
 }
 
 /* Scroll Bar Customization */
 ::-webkit-scrollbar {
-    width: 1.0rem;
+    width: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 1.0rem;
+    border-radius: 1rem;
     background-color: #318ce7;
 }
 
@@ -40,13 +42,13 @@ button:disabled {
 
 .navBar {
     background-color: #b2ffff;
-    height: 6.0rem;
+    height: 6rem;
     position: fixed;
     left: calc(var(--sidewidth) - 1rem);
     right: 0rem;
     width: auto;
 
-    box-shadow: #f5f5f5 0rem .8rem .5rem;
+    box-shadow: #f5f5f5 0rem 0.8rem 0.5rem;
 }
 
 .navBar .profile {
@@ -57,10 +59,10 @@ button:disabled {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    width: 20.0rem;
-    font-size: 2.0rem;
-    margin-top: 1.0rem;
-    padding: 1.0rem 0rem;
+    width: 20rem;
+    font-size: 2rem;
+    margin-top: 1rem;
+    padding: 1rem 0rem;
     display: inline-block;
     position: absolute;
 }
@@ -68,31 +70,31 @@ button:disabled {
 #logo {
     width: fit-content;
     background-color: #b2ffff;
-    border-bottom-right-radius: 2.0rem;
-    border-top-right-radius: 2.0rem;
+    border-bottom-right-radius: 2rem;
+    border-top-right-radius: 2rem;
     display: flex;
     margin: 0 auto;
 }
 
 #logo h3 {
     font-size: 2.667rem;
-    padding: 1.2rem 1rem 1.2rem 3.0rem;
+    padding: 1.2rem 1rem 1.2rem 3rem;
     display: inline-block;
 }
 
 .navBar .signInUp {
     display: inline-block;
     position: absolute;
-    right: 1.0rem;
+    right: 1rem;
 }
 
 .loginParam {
-    width: 16.0rem;
-    padding: .5rem;
+    width: 16rem;
+    padding: 0.5rem;
     font-size: 1.6rem;
-    margin-right: 1.0rem;
-    border: .2rem solid #318ce7;
-    border-radius: .5rem;
+    margin-right: 1rem;
+    border: 0.2rem solid #318ce7;
+    border-radius: 0.5rem;
 }
 
 /* All buttons */
@@ -101,11 +103,11 @@ button {
     cursor: pointer;
     background-color: #318ce7;
     margin-right: 1.5rem;
-    margin-top: 1.0rem;
+    margin-top: 1rem;
     color: #eeeeff;
     font-size: 1.6rem;
-    padding: 1.0rem;
-    border-radius: .5rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
     transition-delay: 100ms;
 }
 
@@ -113,66 +115,66 @@ button {
 
 .sidenav {
     height: auto;
-    padding: 1.0rem;
+    padding: 1rem;
     width: var(--sidewidth);
     position: fixed;
-    border-top-right-radius: 2.0rem;
-    border-bottom-right-radius: 2.0rem;
-    border-right: #b2ffff .8rem solid;
+    border-top-right-radius: 2rem;
+    border-bottom-right-radius: 2rem;
+    border-right: #b2ffff 0.8rem solid;
     z-index: 1;
     left: 0;
     top: 0;
     bottom: 0rem;
     background-color: #e5e4e2;
     overflow-x: hidden;
-    padding-top: 1.0rem;
+    padding-top: 1rem;
 }
 
 .connectedTo,
 .people,
 .bio,
 .connectedUsers > #title {
-    border: .2rem solid;
+    border: 0.2rem solid;
     width: fit-content;
     background-color: #b2ffff;
-    margin: 2.0rem auto;
-    margin-top: 4.0rem;
+    margin: 2rem auto;
+    margin-top: 4rem;
     border-radius: 1.5rem;
     align-items: center;
-    padding: 2.0rem 4.0rem;
+    padding: 2rem 4rem;
 }
 
 .connectedUsers {
-    width: 23.0rem;
-    margin: .5rem auto;
+    width: 23rem;
+    margin: 0.5rem auto;
 }
 
 .connectedUsers > #userList,
 .userDataSection > #globalUserList {
-    max-height: 44.0rem;
+    max-height: 44rem;
     overflow-y: auto;
-    padding-right: .5rem;
+    padding-right: 0.5rem;
 }
 
 .connectedUsers > #title {
-    border-radius: .8rem;
+    border-radius: 0.8rem;
     border: none;
-    width: 23.0rem;
-    padding: .8rem 1.0rem .8rem 4.0rem;
-    font-size: 2.0rem;
+    width: 23rem;
+    padding: 0.8rem 1rem 0.8rem 4rem;
+    font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 1.0rem;
+    margin-bottom: 1rem;
 }
 
 .connectedUsers .currentUser,
 .globalUser {
-    margin-bottom: .8rem;
-    border-left: .5rem solid #318ce7;
-    font-size: 2.0rem;
-    padding: .5rem;
+    margin-bottom: 0.8rem;
+    border-left: 0.5rem solid #318ce7;
+    font-size: 2rem;
+    padding: 0.5rem;
     cursor: pointer;
-    border-top-right-radius: .8rem;
-    border-bottom-right-radius: .8rem;
+    border-top-right-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
 
     white-space: nowrap;
     overflow: hidden;
@@ -185,13 +187,13 @@ button {
 }
 
 .connectedTo #userName {
-    width: 15.0rem;
+    width: 15rem;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
     font-size: 2.2667rem;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     font-weight: bolder;
 
     white-space: nowrap;
@@ -201,34 +203,34 @@ button {
 
 .goglobal {
     position: absolute;
-    left: calc((var(--sidewidth) - 23rem)/2);;
-    bottom: 10.0rem;
+    left: calc((var(--sidewidth) - 23rem) / 2);
+    bottom: 10rem;
     width: fit-content;
     background-color: #b2ffff;
     display: flex;
     justify-content: space-between;
     align-content: center;
     align-items: center;
-    border-radius: 1.0rem;
+    border-radius: 1rem;
 }
 
 .goglobal > button {
     margin: 0;
     font-size: 2.4rem;
-    padding: .5rem .8rem;
+    padding: 0.5rem 0.8rem;
 }
 
 .goglobal > span {
-    padding: .5rem 7.0rem .5rem 4.0rem;
+    padding: 0.5rem 7rem 0.5rem 4rem;
 }
 
 .people {
     border: none;
     position: fixed;
-    left: calc((var(--sidewidth) - 23rem)/2);
-    bottom: 2.0rem;
-    width: 23.0rem;
-    padding: 1.3rem 4.0rem;
+    left: calc((var(--sidewidth) - 23rem) / 2);
+    bottom: 2rem;
+    width: 23rem;
+    padding: 1.3rem 4rem;
 }
 
 .people > p,
@@ -240,7 +242,7 @@ span {
 
 .people > p {
     position: relative;
-    left: 7.0rem;
+    left: 7rem;
 }
 
 /* Chats section */
@@ -249,7 +251,7 @@ span {
     position: fixed;
     height: auto;
     width: calc(100vw - var(--sidewidth));
-    top: 6.0rem;
+    top: 6rem;
     left: var(--sidewidth);
     bottom: 4.5rem;
     right: 0;
@@ -257,21 +259,21 @@ span {
 
 .chats .messageDiv {
     /* bottom: 4.5rem; */
-    left: calc((100vw - var(--sidewidth))/2);
+    left: calc((100vw - var(--sidewidth)) / 2);
     margin: 0rem auto;
-    border-radius: 1.0rem;
+    border-radius: 1rem;
     /* right: 1.0rem; */
     width: fit-content;
     background-color: #e5e4e2;
 }
 
 .chats .messageDiv #messageBox {
-    width: 60.0rem;
+    width: 60rem;
     height: 3.4667rem;
     font-size: 1.6rem;
-    padding: 0 1.0rem;
-    margin: 1.5rem 2.0rem;
-    border-radius: 1.0rem;
+    padding: 0 1rem;
+    margin: 1.5rem 2rem;
+    border-radius: 1rem;
 }
 
 #messageBox:disabled {
@@ -283,17 +285,17 @@ span {
     height: auto;
     font-size: 2.4rem;
     font-weight: bold;
-    padding: 1.0rem;
+    padding: 1rem;
     /* margin: 1.0rem 11.0rem; */
-    margin: 1.0rem auto;
+    margin: 1rem auto;
     width: var(--chatListWidth);
     min-width: 65rem;
-    border-radius: 1.0rem;
+    border-radius: 1rem;
     background-color: #e5e4e2;
 }
 
 .chats > .top {
-    padding-left: 2.0rem;
+    padding-left: 2rem;
 }
 
 .chatList {
@@ -302,15 +304,14 @@ span {
             rgba(255, 255, 255, 0.2)
         ),
         url("./Images/chatListBackground.png") center;
-    background-position: bottom -.5rem right 17.0rem;
+    background-position: center bottom;
     background-repeat: no-repeat;
-    background-size: auto 40.0rem;
+    background-size: auto calc(0.8 * (100vh - 25rem));
 
     background-color: transparent;
-    /* height: 51.0rem; */
     height: calc(100vh - 25rem);
-    border-left: #b2ffff .5rem solid;
-    border-right: #b2ffff .5rem solid;
+    border-left: #b2ffff 0.5rem solid;
+    border-right: #b2ffff 0.5rem solid;
     overflow: auto;
 }
 
@@ -320,31 +321,31 @@ span {
     clear: both;
 
     width: fit-content;
-    max-width: calc(.6 * var(--chatListWidth));
+    max-width: calc(0.6 * var(--chatListWidth));
     background-color: #b2ffff;
     right: 1.5rem;
-    padding: .5rem 1.5rem;
-    border-radius: .5rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
     font-size: 1.733rem;
     font-weight: normal;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 .left {
-    float:none;
+    float: none;
     clear: both;
     color: #f5f5f5;
     width: fit-content;
     background-color: #318ce7;
     right: 1.5rem;
-    padding: .3rem 1.2rem;
-    border-radius: .5rem;
+    padding: 0.3rem 1.2rem;
+    border-radius: 0.5rem;
     font-size: 1.333rem;
     font-weight: normal;
     font-style: italic;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
     position: relative;
-    left: calc(var(--chatListWidth)/2 - 6rem);
+    left: calc(var(--chatListWidth) / 2 - 6rem);
 }
 
 .received {
@@ -352,35 +353,36 @@ span {
     clear: both;
 
     width: fit-content;
-    max-width: calc(.6 * var(--chatListWidth));
+    max-width: calc(0.6 * var(--chatListWidth));
     background-color: #e5e4e2;
     left: 1.5rem;
-    padding: .5rem 1.5rem;
-    border-radius: .5rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
     font-size: 1.733rem;
     font-weight: normal;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Footer Section */
 
 .bottomFooter {
-    width: 100%;
+    width: 100vw;
     height: 3.5rem;
     background-color: #b2ffff;
     position: fixed;
-    bottom: .0rem;
-    left: 34.0rem;
+    bottom: 0rem;
+    /* left: calc(var(--sidewidth) - 2rem); */
 }
 
 .bottomFooter h3 {
     position: absolute;
-    left: 35%;
+    left: calc(var(--sidewidth) + (100vw - var(--sidewidth)) / 2 - 2rem);
     font-size: 1.6rem;
-    padding-top: .9rem;
+    padding-top: 0.9rem;
 }
 
-.bottomFooter .fab, .fas {
+.bottomFooter .fab,
+.fas {
     font-size: 1.6rem;
 }
 
@@ -391,13 +393,13 @@ span {
     display: none;
     width: calc(var(--chatListWidth) - 3rem);
     position: fixed;
-    top: 13.0rem;
+    top: 13rem;
     /* left: 47.5rem; */
     height: calc(100vh - 25rem);
     min-height: 300px;
-    right: calc((100vw - var(--sidewidth) - var(--chatListWidth) + 3rem)/2);
+    right: calc((100vw - var(--sidewidth) - var(--chatListWidth) + 3rem) / 2);
     background-color: #e5e4e2;
-    border-radius: 1.0rem;
+    border-radius: 1rem;
     animation-name: signupanim;
     animation-duration: 0.4s;
     animation-timing-function: linear;
@@ -405,11 +407,11 @@ span {
 
 @keyframes signupanim {
     0% {
-        transform: translateY(-80.0rem) scale(0.1, 0.1);
+        transform: translateY(-80rem) scale(0.1, 0.1);
     }
 
     100% {
-        transform: translateY(.0rem);
+        transform: translateY(0rem);
     }
 }
 
@@ -428,17 +430,17 @@ span {
 #userSignup input,
 textarea {
     clear: right;
-    left: 10.0rem;
-    width: 30.0rem;
-    padding: .8rem;
+    left: 10rem;
+    width: 30rem;
+    padding: 0.8rem;
     font-size: 1.6rem;
-    border-radius: .4rem;
-    margin: 1.0rem;
-    border: .2rem solid #318ce7;
+    border-radius: 0.4rem;
+    margin: 1rem;
+    border: 0.2rem solid #318ce7;
 }
 
 #userSignup label {
-    font-size: 2.0rem;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -447,7 +449,7 @@ textarea {
 }
 #userSignup textarea[name="signupBio"] {
     margin-left: 6.8rem;
-    margin-bottom: 2.0rem;
+    margin-bottom: 2rem;
     font-family: sans-serif;
     font-size: 1.6rem;
 }
@@ -469,27 +471,29 @@ button:active {
     display: inline-block;
     width: var(--userDataSectonWidth);
     height: 100%;
-    padding: 2.0rem;
+    padding: 2rem;
+    padding-right: 0;
 }
 
 .userDataSection #inpSearch {
     font-size: 1.733rem;
-    border-radius: .5rem;
-    border: .2rem solid #318ce7;
-    padding: .5rem;
-    margin: 1.0rem 1.5rem;
+    border-radius: 0.5rem;
+    border: 0.2rem solid #318ce7;
+    padding: 0.5rem;
+    margin: 1rem 1.5rem;
 }
 
 .userDataSection > #globalUserList {
-    margin: 0 4.0rem;
+    /* width: 34rem; */
+    margin: 0 0 0 1.5rem;
     max-height: calc(100vh - 34rem);
     min-height: 21rem;
-    padding-right: 1.0rem;
+    padding-right: 1rem;
 }
 
 .globalUser {
-    padding: .8rem;
-    margin-bottom: 1.0rem;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 /* User Preview */
@@ -502,12 +506,12 @@ button:active {
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
-    border: .2rem dashed;
-    border-radius: 1.0rem;
+    border: 0.2rem dashed;
+    border-radius: 1rem;
 }
 .bio {
     position: relative;
-    width: 23.0rem;
+    width: 23rem;
     padding: 1.5rem;
     padding-top: 1.7rem;
 }
@@ -518,9 +522,9 @@ button:active {
     font-weight: bold;
     font-size: 1.8667rem;
     left: 1.5rem;
-    padding: .2rem .4rem;
-    border: .2rem solid;
-    border-radius: 1.0rem;
+    padding: 0.2rem 0.4rem;
+    border: 0.2rem solid;
+    border-radius: 1rem;
 }
 
 .bio > #description {
@@ -528,33 +532,53 @@ button:active {
     overflow-y: auto;
     max-height: 8.1rem;
     font-size: 1.6rem;
-    padding-right: .5rem;
+    padding-right: 0.5rem;
 }
 
 #nextUser {
-    width: 23.0rem;
-    margin: .5rem auto 1.5rem auto;
-    margin-left: calc((var(--previewSectionWidth) - 24rem)/2);
+    width: 23rem;
+    margin: 0.5rem auto 1.5rem auto;
+    margin-left: calc((var(--previewSectionWidth) - 24rem) / 2);
 }
 
 /* Media queries for responsive */
 @media screen and (max-width: 1300px) {
     :root {
-        --sidewidth : 30rem;
-        --chatListWidth : calc(100vw - var(--sidewidth) - 2rem);
-        --previewSectionWidth : 30rem;
+        --sidewidth: 30rem;
+        --chatListWidth: calc(100vw - var(--sidewidth) - 2rem);
+        --previewSectionWidth: 30rem;
     }
-
 }
 
-@media (max-width : 1024px) {
-    *{
+@media (max-width: 1135px) {
+    .userDataSection #inpSearch {
+        display: block;
+        margin-bottom: 0;
+    }
+    .userDataSection button {
+        margin-bottom: 1rem;
+        margin-left: 2rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    * {
         font-size: 58%;
     }
 }
 
+@media (max-width: 940px) {
+    .chats .messageDiv #messageBox {
+        width: 50rem;
+    }
+}
+
 @media (max-width: 768px) {
-    *{
+    * {
         font-size: 50%;
+    }
+    #logo h3 {
+        padding-left: 1rem;
+        padding-top: 2.2rem;
     }
 }
