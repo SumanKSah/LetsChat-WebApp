@@ -186,6 +186,7 @@ btnCheckAvail.addEventListener("click", () => {
                 } else {
                     checkMark.style.visibility = "visible";
                     checkMark.innerHTML = "✖";
+                    btnSignupSubmit.disabled = true;
                 }
             })
             .catch((err) => console.error(err));
